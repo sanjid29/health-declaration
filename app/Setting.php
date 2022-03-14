@@ -58,7 +58,7 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereValue($value)
  * @mixin \Eloquent
  */
-class Setting extends \App\Projects\MyProject\Modules\Settings\Setting
+class Setting extends \App\Projects\HealthDeclaration\Modules\Settings\Setting
 {
    /*--------------------------------------
    | Note : Empty class.

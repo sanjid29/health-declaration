@@ -1,0 +1,1 @@
+@extends('projects.health-declaration.layouts.module.grid.template')

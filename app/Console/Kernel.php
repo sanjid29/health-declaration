@@ -42,7 +42,7 @@ class Kernel extends ConsoleKernel
         /*---------------------------------
         | You can load project specific command directories here.
         |---------------------------------*/
-        $this->load(app_path('Projects/MyProject/Commands'));
+        $this->load(app_path('Projects/HealthDeclaration/Commands'));
 
         require base_path('routes/console.php');
     }

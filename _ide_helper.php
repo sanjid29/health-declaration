@@ -15927,7 +15927,7 @@
      
 }
 
-    namespace App\Projects\MyProject\Helpers { 
+    namespace App\Projects\HealthDeclaration\Helpers { 
             /**
      * 
      *
@@ -19437,7 +19437,7 @@ namespace  {
             class Html extends \Collective\Html\HtmlFacade {}
             class SSH extends \Collective\Remote\RemoteFacade {}
             class PDF extends \Barryvdh\DomPDF\Facade {}
-            class Cached extends \App\Projects\MyProject\Helpers\Cached {}
+            class Cached extends \App\Projects\HealthDeclaration\Helpers\Cached {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}
             class QrCode extends \SimpleSoftwareIO\QrCode\Facades\QrCode {}

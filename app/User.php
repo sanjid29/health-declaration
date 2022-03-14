@@ -126,7 +126,7 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereZipCode($value)
  * @mixin \Eloquent
  */
-class User extends \App\Projects\MyProject\Modules\Users\User
+class User extends \App\Projects\HealthDeclaration\Modules\Users\User
 {
    /*--------------------------------------
    | Note : Empty class.

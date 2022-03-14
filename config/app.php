@@ -185,7 +185,7 @@ return [
         /*---------------------------------
         | Section: Project Service providers
         |---------------------------------*/
-        App\Projects\MyProject\Providers\AppServiceProvider::class,
+        App\Projects\HealthDeclaration\Providers\AppServiceProvider::class,
     ],
 
     /*
@@ -255,7 +255,7 @@ return [
         | Section: Alias project module classes.
         |-------------------------------------------------------------------------*/
         // 'SuperHeroes' => App\Mainframe\Modules\SuperHeroes\SuperHero::class,
-        'Cached' => App\Projects\MyProject\Helpers\Cached::class,
+        'Cached' => App\Projects\HealthDeclaration\Helpers\Cached::class,
     ],
 
 ];

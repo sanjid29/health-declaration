@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'MyProject'),
-    'project' => env('PROJECT', 'MyProject'),
-    'project_key' => env('PROJECT_KEY'),  // my-project
+    'name' => env('APP_NAME', 'HealthDeclaration'),
+    'project' => env('PROJECT', 'HealthDeclaration'),
+    'project_key' => env('PROJECT_KEY'),  // health-declaration
 
     'project_namespace' => env('PROJECT_NAMESPACE'), // "App\\Projects\\${PROJECT}"
     'project_directory' => env('PROJECT_DIRECTORY'), // "app/Projects/${PROJECT}"
@@ -87,10 +87,10 @@ return [
 
     'load' => [
         'css' => [
-            'projects/my-project/css/my-project.css',
+            'projects/health-declaration/css/health-declaration.css',
         ],
         'js' => [
-            'projects/my-project/js/my-project.js',
+            'projects/health-declaration/js/health-declaration.js',
         ],
     ],
 ];

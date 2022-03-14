@@ -73,7 +73,7 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|Upload whereUuid($value)
  * @mixin \Eloquent
  */
-class Upload extends \App\Projects\MyProject\Modules\Uploads\Upload
+class Upload extends \App\Projects\HealthDeclaration\Modules\Uploads\Upload
 {
    /*--------------------------------------
    | Note : Empty class.
