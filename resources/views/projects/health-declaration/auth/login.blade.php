@@ -44,10 +44,9 @@
                         </a>
                     </div>
                     <div class="clearfix"></div>
-                    <a class="btn btn-default btn-block" target="_blank"
-
-                       href="{{route('register.tenant')}}">{{ __('Registration Business') }}
-                    </a>
+{{--                    <a class="btn btn-default btn-block" target="_blank"--}}
+{{--                       href="{{route('register.tenant')}}">{{ __('Registration Business') }}--}}
+{{--                    </a>--}}
 
                 </div>
             </div>

@@ -12,7 +12,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     @section('head')
     @show
-    @include('mainframe.layouts.default.includes.css')
+    @include('projects.health-declaration.layouts.default.includes.css')
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
 </head>
 <body class="hold-transition login-page lb-bg">
@@ -21,7 +21,7 @@
         {{config('app.name')}}
     </div>
     <div class="login-box-body">
-        @include('mainframe.layouts.default.includes.alerts.messages-top')
+        @include('projects.health-declaration.layouts.default.includes.alerts.messages-top')
 
         @section('content-top')
         @show
@@ -32,11 +32,11 @@
         @section('content-bottom')
         @show
     </div>
-    @include('mainframe.layouts.default.includes.modals.messages')
-    @include('mainframe.layouts.default.includes.modals.delete')
+    @include('projects.health-declaration.layouts.default.includes.modals.messages')
+    @include('projects.health-declaration.layouts.default.includes.modals.delete')
 </div>
 
-@include('mainframe.layouts.default.includes..js')
+@include('projects.health-declaration.layouts.default.includes..js')
 @section('js')
     {{-- js section   --}}
 @show
