@@ -26,6 +26,7 @@ $division = $element;
 
         {{---------------|  Form input start |-----------------------}}
         @include('form.text',['var'=>['name'=>'name','label'=>'Name']])
+        @include('form.text',['var'=>['name'=>'code','label'=>'Code']])
         @include('form.is-active')
         {{---------------|  Form input start |-----------------------}}
 

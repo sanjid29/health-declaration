@@ -26,6 +26,9 @@ $district = $element;
 
         {{---------------|  Form input start |-----------------------}}
         @include('form.text',['var'=>['name'=>'name','label'=>'Name']])
+        @include('form.text',['var'=>['name'=>'code','label'=>'Code']])
+        @include('form.select-model',['var'=>['name'=>'division_id','label'=>'Division', 'name_field'=>'name', 'model'=>\App\Division::class,'class'=>'select2']])
+
         @include('form.is-active')
         {{---------------|  Form input start |-----------------------}}
 
