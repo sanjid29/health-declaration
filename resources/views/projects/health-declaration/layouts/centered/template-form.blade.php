@@ -18,9 +18,26 @@
 <body class="hold-transition login-page lb-bg">
 <div class="container content-wrapper">
     <div class="row">
+        <table class="no-border no-padding" width="100%">
+            <tr>
+                <td width="20%" align="right" style="vertical-align: center">
+                    <img src="{{asset('projects/health-declaration/logo/GoB.png')}}" width="60%"/>
+                </td>
+                <td width="60%" align="center" style="vertical-align: middle">
+                    <h3>Government of the People's Republic of Bangladesh</h3>
+                    <h3>Ministry of Health & Family Welfare</h3>
+                </td>
+                <td width="20%" align="left" style="vertical-align: center">
+                    <img src="{{asset('projects/health-declaration/logo/dghs.jpg')}}" width="60%"/>
+                </td>
+            </tr>
+        </table>
         <div class="login-logo">
             {{config('app.name')}}
         </div>
+    </div>
+    <div class="row">
+        <h3 align="center" style="color:red !important;padding: 5px;">Health Declaration Form</h3>
     </div>
     <div class="row">
         <div class="col-md-12 ">

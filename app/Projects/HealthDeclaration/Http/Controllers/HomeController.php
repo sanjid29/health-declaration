@@ -3,6 +3,7 @@
 namespace App\Projects\HealthDeclaration\Http\Controllers;
 
 
+use App\Projects\HealthDeclaration\DataBlocks\AdminDataBlock;
 use App\Projects\HealthDeclaration\DataBlocks\SampleDataBlock;
 
 class HomeController extends BaseController
@@ -25,12 +26,22 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $this->view('projects.health-declaration.dashboards.admin');
-        $sampleData = (new SampleDataBlock)->data();
+        if(user()->isSuperUser()){
+            $this->view('projects.health-declaration.dashboards.superadmin');
+            $sampleData = (new SampleDataBlock)->data();
 
-        return $this->response()
-            ->setViewVars(['sampleData' => $sampleData])
-            ->send();
+            return $this->response()
+                ->setViewVars(['sampleData' => $sampleData])
+                ->send();
+        }
+        if(user()->isAdmin()){
+            $this->view('projects.health-declaration.dashboards.admin');
+            $adminData = (new AdminDataBlock)->data();
+
+            return $this->response()
+                ->setViewVars(['adminData' => $adminData])
+                ->send();
+        }
     }
 
 }

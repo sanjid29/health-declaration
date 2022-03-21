@@ -24,6 +24,7 @@ class Declaration extends BaseModule
         'passenger_name',
         'passenger_dob',
         'gender',
+        'mode_of_transport',
         'passport_no',
         'flight_no',
         'seat_no',
@@ -35,8 +36,8 @@ class Declaration extends BaseModule
         'nationality',
         'origin_country_id',
         'origin_country_name',
-        'destination_country_id',
-        'destination_country_name',
+        'journey_from_country_id',
+        'journey_from_country_name',
         'visited_country_ids',
         'visited_country_names',
         'division_id',
@@ -56,9 +57,18 @@ class Declaration extends BaseModule
         'has_shortness_of_breath',
         'has_loss_of_taste_or_smell',
         'has_covid',
+        'was_covid_affected',
+        'last_covid_affected_on',
         'first_vaccine_date',
         'second_vaccine_date',
+        'third_vaccine_date',
+        'primary_vaccine_id',
+        'primary_vaccine_name',
+        'secondary_vaccine_id',
+        'secondary_vaccine_name',
         'profile_picture_path',
+        'decision',
+        'remark',
         'is_active',
     ];
 
@@ -79,11 +89,17 @@ class Declaration extends BaseModule
     public static $genderTypes = [
         'male' => 'Male',
         'female' => 'Female',
-        'other' => 'Other',
+        'third_gender' => 'Third Gender',
     ];
     public static $yesNo       = [
         0 => 'No',
         1 => 'Yes',
+    ];
+    public static $modeOfTransportTypes       = [
+        'air' => 'By Air',
+        'road' => 'By Road',
+        'sea' => 'By Sea',
+        'train' => 'By Train',
     ];
 
     /*
@@ -139,7 +155,37 @@ class Declaration extends BaseModule
     |--------------------------------------------------------------------------
     */
     // public function updater() { return $this->belongsTo(\App\User::class, 'updated_by'); }
+    public function originCountry()
+    {
+        return $this->belongsTo(\App\Country::class, 'origin_country_id');
+    }
 
+    public function journeyFromCountry()
+    {
+        return $this->belongsTo(\App\Country::class, 'journey_from_country_id');
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(\App\Division::class, 'division_id');
+    }
+    public function district()
+    {
+        return $this->belongsTo(\App\District::class, 'district_id');
+    }
+    public function upazila()
+    {
+        return $this->belongsTo(\App\Upazila::class, 'upazila_id');
+    }
+
+    public function primaryVaccine()
+    {
+        return $this->belongsTo(\App\Vaccine::class, 'primary_vaccine_id');
+    }
+    public function secondaryVaccine()
+    {
+        return $this->belongsTo(\App\Vaccine::class, 'secondary_vaccine_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | Section: Helpers

@@ -7,9 +7,9 @@
  * @var string $uuid Only available for create
  * @var bool $editable
  * @var array $immutables
- * @var \App\Declaration $element
- * @var \App\Declaration $declaration
- * @var \App\Projects\HealthDeclaration\Modules\Declarations\DeclarationViewProcessor $view
+ * @var \App\Vaccine $element
+ * @var \App\Vaccine $vaccine
+ * @var \App\Projects\HealthDeclaration\Modules\Vaccines\VaccineViewProcessor $view
  */
 ?>
 <script>
@@ -28,7 +28,6 @@
     // Validation
     addValidationRules();
     enableValidation('{{$module->name}}');
-    $('select[id=origin_country_id],select[id=primary_vaccine_id],select[id=secondary_vaccine_id],select[id=journey_from_country_id],select[id=visited_country_ids]').select2();
 
     /*
     |--------------------------------------------------------------------------
@@ -58,6 +57,6 @@
      * Add CSS for validation rules
      */
     function addValidationRules() {
-        // $("input[name=name]").addClass('validate[required]');
+        $("input[name=name]").addClass('validate[required]');
     }
 </script>

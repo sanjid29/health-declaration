@@ -5,7 +5,7 @@ namespace App\Projects\HealthDeclaration\DataBlocks;
 use App\Projects\HealthDeclaration\Features\DataBlocks\DataBlock;
 use App\Projects\HealthDeclaration\Modules\Declarations\Declaration;
 
-class SampleDataBlock extends DataBlock
+class AdminDataBlock extends DataBlock
 {
     /**
      * Load the result
@@ -26,8 +26,6 @@ class SampleDataBlock extends DataBlock
      */
     public function process()
     {
-
-        // Todo: Prepare and load data
 
         $total = Declaration::count();
 

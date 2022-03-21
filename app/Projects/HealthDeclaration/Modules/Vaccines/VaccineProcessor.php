@@ -1,21 +1,21 @@
 <?php /** @noinspection PhpUndefinedClassInspection */
 
-namespace App\Projects\HealthDeclaration\Modules\Declarations;
+namespace App\Projects\HealthDeclaration\Modules\Vaccines;
 
 use \App\Projects\HealthDeclaration\Features\Modular\Validator\ModelProcessor;
-use App\Declaration;
+use App\Vaccine;
 
-class DeclarationProcessor extends ModelProcessor
+class VaccineProcessor extends ModelProcessor
 {
     // Note: Pull in necessary traits
-    use DeclarationProcessorHelper;
+    use VaccineProcessorHelper;
 
     /*
     |--------------------------------------------------------------------------
     | Define properties and variables
     |--------------------------------------------------------------------------
     */
-    /** @var Declaration */
+    /** @var Vaccine */
     public $element;
     // public $immutables;
     // public $transitions;
@@ -29,7 +29,7 @@ class DeclarationProcessor extends ModelProcessor
     /**
      * Pre-fill model before running rule based validations
      *
-     * @param  Declaration  $element
+     * @param  Vaccine  $element
      * @return $this
      */
     public function fill($element)
@@ -39,22 +39,14 @@ class DeclarationProcessor extends ModelProcessor
     }
 
     /**
-     * @param  Declaration  $element
+     * @param  Vaccine  $element
      * @param  array  $merge
      * @return array
      */
     public static function rules($element, $merge = [])
     {
         $rules = [
-            // 'name' => 'required|between:1,100|'.'unique:declarations,name,'.($element->id ?? 'null').',id,deleted_at,NULL',
-            // 'passenger_name' => 'required',
-            // 'mobile_no' => 'required',
-            // 'gender' => 'required',
-            // 'passenger_dob' => 'required',
-            // 'nationality' => 'required',
-            // 'origin_country_id' => 'required',
-            // 'passport_no' => 'required',
-            // 'mode_of_transport' => 'required',
+            // 'name' => 'required|between:1,100|'.'unique:vaccines,name,'.($element->id ?? 'null').',id,deleted_at,NULL',
             'is_active' => 'in:1,0',
         ];
 
@@ -72,7 +64,7 @@ class DeclarationProcessor extends ModelProcessor
     */
 
     /**
-     * @param  Declaration  $element
+     * @param  Vaccine  $element
      * @return $this
      */
     public function saving($element)
@@ -97,7 +89,7 @@ class DeclarationProcessor extends ModelProcessor
     // public function updated($element) { return $this; }
 
     /**
-     * @param  Declaration  $element
+     * @param  Vaccine  $element
      * @return $this
      */
     public function saved($element)
