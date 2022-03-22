@@ -129,26 +129,33 @@ class DeclarationController extends ModularController
             $decision = $reason = null;
             $isVaccinated = request()->get('is_vaccinated');
             $hasRtPCR = request()->get('has_taken_rt_pcr');
-            if ($isVaccinated) {
+            $hasCovidInThreeDays = request()->get('has_covid');
+
+            if ($hasCovidInThreeDays) {
+                $decision = "You are Not Allowed to Travel";
+                $reason = "The user has COVID-19 Positive in the last three days.";
+            }
+
+            if ($isVaccinated && !$hasCovidInThreeDays) {
                 if (request()->get('primary_vaccine_id') == '7' && request()->get('first_vaccine_date')) {
                     $decision = "You are Allowed to Travel";
                     $reason = "The user has completed Vaccination.";
                 } elseif (request()->get('primary_vaccine_id') && request()->get('first_vaccine_date') && request()->get('second_vaccine_date')) {
                     $decision = "You are Allowed to Travel";
                     $reason = "The user has completed Vaccination.";
-                } elseif (request()->get('primary_vaccine_id') && !request()->get('first_vaccine_date') && !request()->get('second_vaccine_date')) {
+                } else{
                     $decision = "You are not Allowed to Travel";
                     $reason = "The user has not completed Vaccination.";
                 }
 
-            } elseif (!$isVaccinated && $hasRtPCR) {
+            } elseif (!$isVaccinated && $hasRtPCR && !$hasCovidInThreeDays) {
                 $decision = "You are Allowed to Travel";
-                $reason = "The user has not taken Vaccination but he/she has taken RT-PCT in the last 72 hours.";
-            } elseif (!$isVaccinated && !$hasRtPCR) {
-                $reason = "The user has not taken Vaccination and he/she has not taken RT-PCT in the last 72 hours.";
+                $reason = "The user has not taken Vaccination but he/she has taken RT-PCR in the last 72 hours.";
+            } elseif (!$isVaccinated && !$hasRtPCR && !$hasCovidInThreeDays) {
+                $reason = "The user has not taken Vaccination and he/she has not taken RT-PCR in the last 72 hours.";
                 $decision = "You are Not Allowed to Travel";
             }
-            request()->merge(['decision' => $decision,'remark'=>$reason]);
+            request()->merge(['decision' => $decision, 'remark' => $reason]);
         }
 
         //Create user
