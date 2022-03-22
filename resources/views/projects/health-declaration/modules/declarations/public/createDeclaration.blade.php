@@ -11,7 +11,7 @@
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
         <h4>Personal Information</h4>
         @include('form.text',['var'=>['name'=>'passenger_name','label'=>'Passenger Name/যাত্রীর নাম', 'div'=>'col-sm-12']])
-        @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Phone No/মোবাইল নং', 'div'=>'col-sm-4']])
+        @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Phone No (With Country Code)/মোবাইল নং', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'email','label'=>'Email/ইমেইল', 'div'=>'col-sm-4']])
         @include('form.select-array',['var'=>['name'=>'gender','label'=>'Gender/লিঙ্গ', 'div'=>'col-sm-4','options'=>(\App\Declaration::$genderTypes)]])
         @include('form.date',['var'=>['name'=>'passenger_dob','label'=>'Date of Birth/ জন্ম তারিখ', 'div'=>'col-sm-4']])
