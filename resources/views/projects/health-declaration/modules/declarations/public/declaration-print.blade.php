@@ -119,7 +119,7 @@
 @endsection
 @section('content-bottom')
 
-    <h4>Please bring all necessary documents (Vaccination Card/RT-PCR Test Result/Covid-19 Test Result) with this card.</h4>
+    <h4>Please bring all necessary documents (Vaccination Certificate/Covid-19 Test Result) with this card.</h4>
     {{--    <div class="col-md-6  no-padding pull-left margin">--}}
     {{--        {!! $title ?? '' !!}--}}
     {{--        <span class="small">{!! $content !!}</span>--}}

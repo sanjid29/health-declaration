@@ -68,6 +68,7 @@
         </div>
         <div class="clearfix"></div>
         <div id="rt-pcr-field">
+            <h6>Show RT-PCR test result and give one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
             @include('form.select-array',['var'=>['name'=>'has_taken_rt_pcr','label'=>'Have you taken RT-PCR in the last 72 hours? /আপনি কি গত ৭২ ঘণ্টায় আরটি-পিসিআর নিয়েছেন?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
         </div>
 
