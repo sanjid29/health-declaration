@@ -58,18 +58,21 @@
         @include('form.select-array',['var'=>['name'=>'is_vaccinated','label'=>'Have you taken Vaccination for COVID-19? /আপনি কি COVID-19 এর জন্য টিকা নিয়েছেন?', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])
         <div class="clearfix"></div>
         <div id="vaccination-info">
-            <h6>Show Covid Vaccine Certificate and give one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+
             <div class="clearfix"></div>
             @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
             @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
             @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
             @include('form.select-model',['var'=>['name'=>'secondary_vaccine_id','label'=>'Third Dose Vaccine\তৃতীয় ডোজ টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
             @include('form.date',['var'=>['name'=>'third_vaccine_date','label'=>'Date of 3rd Dose/৩য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
+            <div class="clearfix"></div>
+            <h6>If Yes, show Covid-19 Vaccination Certificate and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
         </div>
         <div class="clearfix"></div>
         <div id="rt-pcr-field">
-            <h6>Show RT-PCR test result and give one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+
             @include('form.select-array',['var'=>['name'=>'has_taken_rt_pcr','label'=>'Have you taken RT-PCR in the last 72 hours? /আপনি কি গত ৭২ ঘণ্টায় আরটি-পিসিআর নিয়েছেন?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
+            <h6>If Yes, show RT-PCR test result and submit one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
         </div>
 
         <div class="clearfix"></div>
