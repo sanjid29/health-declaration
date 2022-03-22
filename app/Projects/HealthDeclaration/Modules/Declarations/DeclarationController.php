@@ -70,30 +70,32 @@ class DeclarationController extends ModularController
     public function healthDeclarationStore()
     {
         $validator = Validator::make(request()->all(), [
-            // 'passenger_name' => 'required',
-            // 'mobile_no' => 'required|numeric',
-            // 'email' => 'email:rfc,dns,filter,strict',
-            // 'passenger_dob' => 'required',
-            // 'gender' => 'required',
-            // 'origin_country_id' => 'required',
-            // 'nationality' => 'required',
-            // 'passport_no' => 'required',
-            // 'flight_no' => 'required',
-            // 'district_id' => 'required',
-            // 'division_id' => 'required',
-            // 'upazila_id' => 'required',
-            // 'has_sore_throat' => 'required',
-            // 'has_fever' => 'required',
-            // 'has_headache' => 'required',
-            // 'has_tiredness' => 'required',
-            // 'has_cough' => 'required',
-            // 'has_shortness_of_breath' => 'required',
-            // 'has_loss_of_taste_or_smell' => 'required',
-            // 'has_covid' => 'required',
-            // 'was_covid_affected' => 'required',
-            // 'last_covid_affected_on' => 'required_if:was_covid_affected,1',
-            // 'primary_vaccine_id' => 'required',
-            // 'first_vaccine_date' => 'required',
+            'passenger_name' => 'required',
+            'mobile_no' => 'required|numeric',
+            'email' => 'email:rfc,dns,filter,strict',
+            'passenger_dob' => 'required',
+            'gender' => 'required',
+            'origin_country_id' => 'required',
+            'nationality' => 'required',
+            'passport_no' => 'required',
+            'flight_no' => 'required',
+            'district_id' => 'required',
+            'division_id' => 'required',
+            'upazila_id' => 'required',
+            'has_sore_throat' => 'required',
+            'has_fever' => 'required',
+            'has_headache' => 'required',
+            'has_tiredness' => 'required',
+            'has_cough' => 'required',
+            'has_shortness_of_breath' => 'required',
+            'has_loss_of_taste_or_smell' => 'required',
+            'has_covid' => 'required',
+            'was_covid_affected' => 'required',
+            'last_covid_affected_on' => 'required_if:was_covid_affected,1',
+            'is_vaccinated' => 'required',
+            'primary_vaccine_id' => 'required_if:is_vaccinated,1',
+            'has_taken_rt_pcr' => 'required_if:is_vaccinated,0',
+            'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
         ]);
 
         if ($validator->fails()) {
@@ -119,9 +121,36 @@ class DeclarationController extends ModularController
         if (request()->has('primary_vaccine_id')) {
             request()->merge(['primary_vaccine_name' => Vaccine::find(request()->get('primary_vaccine_id'))->name]);
         }
-        if (request()->has('secondary_vaccine_id')) {
+        if (request()->has('secondary_vaccine_id') && request()->get('secondary_vaccine_id')) {
             request()->merge(['secondary_vaccine_name' => Vaccine::find(request()->get('secondary_vaccine_id'))->name]);
         }
+
+        if (request()->has('is_vaccinated')) {
+            $decision = $reason = null;
+            $isVaccinated = request()->get('is_vaccinated');
+            $hasRtPCR = request()->get('has_taken_rt_pcr');
+            if ($isVaccinated) {
+                if (request()->get('primary_vaccine_id') == '7' && request()->get('first_vaccine_date')) {
+                    $decision = "You are Allowed to Travel";
+                    $reason = "The user has completed Vaccination.";
+                } elseif (request()->get('primary_vaccine_id') && request()->get('first_vaccine_date') && request()->get('second_vaccine_date')) {
+                    $decision = "You are Allowed to Travel";
+                    $reason = "The user has completed Vaccination.";
+                } elseif (request()->get('primary_vaccine_id') && !request()->get('first_vaccine_date') && !request()->get('second_vaccine_date')) {
+                    $decision = "You are not Allowed to Travel";
+                    $reason = "The user has not completed Vaccination.";
+                }
+
+            } elseif (!$isVaccinated && $hasRtPCR) {
+                $decision = "You are Allowed to Travel";
+                $reason = "The user has not taken Vaccination but he/she has taken RT-PCT in the last 72 hours.";
+            } elseif (!$isVaccinated && !$hasRtPCR) {
+                $reason = "The user has not taken Vaccination and he/she has not taken RT-PCT in the last 72 hours.";
+                $decision = "You are Not Allowed to Travel";
+            }
+            request()->merge(['decision' => $decision,'remark'=>$reason]);
+        }
+
         //Create user
         $declaration = Declaration::create(request()->all());
 
@@ -157,7 +186,7 @@ class DeclarationController extends ModularController
             $content .= route('declarations.show', $declaration->id);
         }
 
-        return View::make('projects.health-declaration.modules.declarations.public.declaration-print', compact(['declaration','content']));
+        return View::make('projects.health-declaration.modules.declarations.public.declaration-print', compact(['declaration', 'content']));
     }
 
     public function downloadPdf($declaration)

@@ -16,7 +16,7 @@
         @include('form.select-array',['var'=>['name'=>'gender','label'=>'Gender/লিঙ্গ', 'div'=>'col-sm-4','options'=>(\App\Declaration::$genderTypes)]])
         @include('form.date',['var'=>['name'=>'passenger_dob','label'=>'Date of Birth/ জন্ম তারিখ', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'nationality','label'=>'Nationality/জাতীয়তা', 'div'=>'col-sm-4']])
-        @include('form.select-model',['var'=>['name'=>'origin_country_id','label'=>'Country Of Origin/মাত্রিভূমি','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
+        @include('form.select-model',['var'=>['name'=>'origin_country_id','label'=>'Country Of Origin/মাতৃভূমি','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
 
         <div class="clearfix"></div>
         <h4>Travel Information</h4>
@@ -55,20 +55,29 @@
         <div class="clearfix"></div>
         <h6>Covid Vaccine Information/আপনি কিংবা আপনার ভ্রমনসঙ্গীদের কোভিড-১৯ ভ্যাক্সিন তথ্য</h6>
         <div class="clearfix"></div>
-        @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
-        @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
-        @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
-        @include('form.select-model',['var'=>['name'=>'secondary_vaccine_id','label'=>'Third Dose Vaccine\তৃতীয় ডোজ টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
-        @include('form.date',['var'=>['name'=>'third_vaccine_date','label'=>'Date of 3rd Dose/৩য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
+        @include('form.select-array',['var'=>['name'=>'is_vaccinated','label'=>'Have you taken Vaccination for COVID-19? /আপনি কি COVID-19 এর জন্য টিকা নিয়েছেন?', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])
         <div class="clearfix"></div>
-        <h6>Show Covid Vaccine Certificate and give one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+        <div id="vaccination-info">
+            <h6>Show Covid Vaccine Certificate and give one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+            <div class="clearfix"></div>
+            @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
+            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
+            @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
+            @include('form.select-model',['var'=>['name'=>'secondary_vaccine_id','label'=>'Third Dose Vaccine\তৃতীয় ডোজ টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
+            @include('form.date',['var'=>['name'=>'third_vaccine_date','label'=>'Date of 3rd Dose/৩য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
+        </div>
+        <div class="clearfix"></div>
+        <div id="rt-pcr-field">
+            @include('form.select-array',['var'=>['name'=>'has_taken_rt_pcr','label'=>'Have you taken RT-PCR in the last 72 hours? /আপনি কি গত ৭২ ঘণ্টায় আরটি-পিসিআর নিয়েছেন?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
+        </div>
+
         <div class="clearfix"></div>
         <div id="declaration">
             <h5>Declaration</h5>
             @include('form.checkbox',['var'=>['name'=>'declaration_check']])
             <div class="clearfix"></div>
             <h5>I, hereby, declare that the information provided in this form true and valid to the best of my knowledge./
-                আমি এই মর্মে ঘোষণা করছি আমার জানামতে এ সকল তহ্য সত্য।</h5>
+                আমি এই মর্মে ঘোষণা করছি আমার জানামতে এ সকল তথ্য সত্য।</h5>
         </div>
         <div class="form-group row mb-0" id="divSubmit">
             <div class="col-md-12">
@@ -91,7 +100,7 @@
                 $('#divSubmit').show();
             }
         });
-
+        showVaccinationInfo();
 
         $('#healthDeclaration-form').validationEngine({
             prettySelect: true,
@@ -122,6 +131,32 @@
         $("#healthDeclaration-form select[id=has_loss_of_taste_or_smell]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=has_covid]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=was_covid_affected]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=primary_vaccine_id]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
+
+
+        function viewVaccineInfo() {
+            $('#rt-pcr-field').hide();
+            $('#vaccination-info').hide();
+            let isVaccinated = $('select[name=is_vaccinated]').val();
+            if (isVaccinated === '1') {
+                $('#vaccination-info').show();
+                $('#rt-pcr-field').hide();
+                $("#healthDeclaration-form select[id=primary_vaccine_id]").addClass('validate[required]');
+                $("#healthDeclaration-form select[id=has_taken_rt_pcr]").removeClass('validate[required]');
+
+            } else if (isVaccinated === '0') {
+                $('#rt-pcr-field').show();
+                $('#vaccination-info').hide();
+                $("#healthDeclaration-form select[id=primary_vaccine_id]").removeClass('validate[required]');
+                $("#healthDeclaration-form select[id=has_taken_rt_pcr]").addClass('validate[required]');
+
+            }
+        }
+
+        function showVaccinationInfo() {
+            viewVaccineInfo();
+            $('select[name=is_vaccinated]').change(viewVaccineInfo);
+        }
+
     </script>
 @endsection

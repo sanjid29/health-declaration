@@ -50,48 +50,65 @@
     </table>
 @endsection
 @section('content')
+    <h4 align="center">Health Declaration Card</h4>
+    <div class="col-md-12 no-padding no-margin" style="width: 250px; vertical-align: center">
+        {!! QrCode::size(250)->generate($content); !!}
+    </div>
 
-    <table class="table-condensed" width="100%">
+    <div class="clearfix"></div>
+    <h4>Personal Information</h4>
+    <table class="table table-bordered no-padding" width="100%">
         <tr>
             <td>Name</td>
             <td>{{$declaration->passenger_name}}</td>
             <td>Gender</td>
             <td>{{$declaration->gender}}</td>
-            <td>Passport No</td>
-            <td>{{$declaration->passport_no}}</td>
         </tr>
         <tr>
+            <td>Passport No</td>
+            <td>{{$declaration->passport_no}}</td>
             <td>Nationality</td>
             <td>{{$declaration->nationality}}</td>
+
+        </tr>
+        <tr>
             <td>Mode of Transportation</td>
             <td>{{$declaration->mode_of_transport}}</td>
             <td>Visiting From</td>
             <td>{{$declaration->journey_from_country_name}}</td>
         </tr>
-
+        <tr>
+            <td>Arrival Date</td>
+            <td>{{formatDate($declaration->arrival_date)}}</td>
+            <td>Staying At</td>
+            <td>{{$declaration->division_name." , ".$declaration->district_name}}</td>
+        </tr>
+    </table>
+    <h4>Covid Information</h4>
+    <table class="table table-bordered no-padding" width="100%">
         <tr>
             <td>Is Covid-19 Positive In the Last Three Days?</td>
-            <td>{{$declaration->has_covid}}</td>
-            <td>Was Covid-19 Positive?</td>
-            <td>{{$declaration->was_covid_affected}}</td>
-            <td>Last Covid-19 Positive On</td>
-            <td>{{$declaration->last_covid_affected_on}}</td>
+            <td>{{formatYesNo($declaration->has_covid)}}</td>
+            <td>Was Covid-19 Positive And Date?</td>
+            <td>{{formatYesNo($declaration->was_covid_affected)." ,".formatDate($declaration->last_covid_affected_on)}}</td>
         </tr>
         <tr>
-            <td>Covid-19 Vaccination</td>
+            <td>Has COVID-19 Vaccination</td>
+            <td>{{formatYesNo($declaration->is_vaccinated)}}</td>
+            <td>Covid-19 Vaccination Name</td>
             <td>{{$declaration->primary_vaccine_name}}</td>
+        </tr>
+        <tr>
             <td>1st Dose Date</td>
             <td>{{$declaration->first_vaccine_date}}</td>
             <td>2nd Dose Date</td>
             <td>{{$declaration->second_vaccine_date}}</td>
         </tr>
         <tr>
-            <td>Created At</td>
+            <td>Has Taken RT-PCR</td>
+            <td>{{formatYesNo($declaration->has_taken_rt_pcr)}}</td>
+            <td>Declaration Created At</td>
             <td>{{formatDateTime($declaration->created_at)}}</td>
-            <td>Arrival Date</td>
-            <td>{{formatDate($declaration->arrival_date)}}</td>
-            <td>Staying At</td>
-            <td>{{"Division ".$declaration->division_name." District ".$declaration->district_name}}</td>
         </tr>
 
     </table>
@@ -99,13 +116,11 @@
 @endsection
 @section('content-bottom')
 
-    <div class="col-md-4 no-padding no-margin pull-left" style="width: 150px">
-        {!! QrCode::size(150)->generate($content); !!}
-    </div>
-{{--    <div class="col-md-6  no-padding pull-left margin">--}}
-{{--        {!! $title ?? '' !!}--}}
-{{--        <span class="small">{!! $content !!}</span>--}}
-{{--    </div>--}}
+    <h4>Please bring all necessary documents (Vaccination Card/RT-PCR Test Result/Covid-19 Test Result) with this card.</h4>
+    {{--    <div class="col-md-6  no-padding pull-left margin">--}}
+    {{--        {!! $title ?? '' !!}--}}
+    {{--        <span class="small">{!! $content !!}</span>--}}
+    {{--    </div>--}}
 @endsection
 
 @section('js')

@@ -59,6 +59,8 @@ class Declaration extends BaseModule
         'has_covid',
         'was_covid_affected',
         'last_covid_affected_on',
+        'is_vaccinated',
+        'has_taken_rt_pcr',
         'first_vaccine_date',
         'second_vaccine_date',
         'third_vaccine_date',

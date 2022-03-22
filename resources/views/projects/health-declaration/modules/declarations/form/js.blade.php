@@ -24,7 +24,7 @@
     @if($element->some_id)
     $('.delete-cta button[name=genericDeleteBtn]').attr('data-redirect_success', '{!! route('some-module.edit',$element->some_id) !!}')
     @endif
-
+    showVaccinationInfo();
     // Validation
     addValidationRules();
     enableValidation('{{$module->name}}');
@@ -59,5 +59,28 @@
      */
     function addValidationRules() {
         // $("input[name=name]").addClass('validate[required]');
+    }
+    function viewVaccineInfo() {
+        $('#rt-pcr-field').hide();
+        $('#vaccination-info').hide();
+        let isVaccinated = $('select[name=is_vaccinated]').val();
+        if (isVaccinated === '1') {
+            $('#vaccination-info').show();
+            $('#rt-pcr-field').hide();
+            $("#healthDeclaration-form select[id=primary_vaccine_id]").addClass('validate[required]');
+            $("#healthDeclaration-form select[id=has_taken_rt_pcr]").removeClass('validate[required]');
+
+        } else if (isVaccinated === '0') {
+            $('#rt-pcr-field').show();
+            $('#vaccination-info').hide();
+            $("#healthDeclaration-form select[id=primary_vaccine_id]").removeClass('validate[required]');
+            $("#healthDeclaration-form select[id=has_taken_rt_pcr]").addClass('validate[required]');
+
+        }
+    }
+
+    function showVaccinationInfo() {
+        viewVaccineInfo();
+        $('select[name=is_vaccinated]').change(viewVaccineInfo);
     }
 </script>

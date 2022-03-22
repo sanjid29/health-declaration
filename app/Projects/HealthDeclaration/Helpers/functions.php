@@ -23,3 +23,10 @@ function formatDateTime($date)
 {
     return Date::formattedDateTime($date);
 }
+
+function formatYesNo($data){
+    if($data==1){
+        return "Yes";
+    }
+    return "No";
+}
