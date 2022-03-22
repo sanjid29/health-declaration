@@ -15,6 +15,11 @@
  */
 $declaration = $element;
 ?>
+@section('content-top')
+
+        <a class="btn btn-primary" href="{{route('healthDeclaration-print',$declaration->id)}}" target="_blank" style="color:white">View PDF</a>
+
+@endsection
 
 @section('content')
     <div class="col-md-12 no-padding">

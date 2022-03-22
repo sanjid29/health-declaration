@@ -103,22 +103,22 @@ class DeclarationController extends ModularController
 
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        if (request()->has('origin_country_id')) {
+        if (request()->has('origin_country_id') && request()->get('origin_country_id')) {
             request()->merge(['origin_country_name' => Country::find(request()->get('origin_country_id'))->name]);
         }
-        if (request()->has('journey_from_country_id')) {
+        if (request()->has('journey_from_country_id') && request()->get('journey_from_country_id')) {
             request()->merge(['journey_from_country_name' => Country::find(request()->get('journey_from_country_id'))->name]);
         }
-        if (request()->has('division_id')) {
+        if (request()->has('division_id') && request()->get('division_id')) {
             request()->merge(['division_name' => Division::find(request()->get('division_id'))->name]);
         }
-        if (request()->has('district_id')) {
+        if (request()->has('district_id') && request()->get('district_id')) {
             request()->merge(['district_name' => District::find(request()->get('district_id'))->name]);
         }
-        if (request()->has('upazila_id')) {
+        if (request()->has('upazila_id') && request()->get('upazila_id')) {
             request()->merge(['upazila_name' => Upazila::find(request()->get('upazila_id'))->name]);
         }
-        if (request()->has('primary_vaccine_id')) {
+        if (request()->has('primary_vaccine_id') && request()->get('primary_vaccine_id')) {
             request()->merge(['primary_vaccine_name' => Vaccine::find(request()->get('primary_vaccine_id'))->name]);
         }
         if (request()->has('secondary_vaccine_id') && request()->get('secondary_vaccine_id')) {
