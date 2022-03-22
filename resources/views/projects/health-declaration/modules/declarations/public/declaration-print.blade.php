@@ -51,10 +51,13 @@
 @endsection
 @section('content')
     <h4 align="center">Health Declaration Card</h4>
+
     <div class="col-md-12 no-padding no-margin" style="width: 250px; vertical-align: center">
         {!! QrCode::size(250)->generate($content); !!}
     </div>
 
+    <div class="clearfix"></div>
+    <h4> Decision: {{$declaration->decision}}</h4>
     <div class="clearfix"></div>
     <h4>Personal Information</h4>
     <table class="table table-bordered no-padding" width="100%">
