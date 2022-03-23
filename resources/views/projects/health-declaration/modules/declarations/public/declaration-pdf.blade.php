@@ -8,11 +8,6 @@
         padding: 0px 5px;
 
     }
-    @media print {
-        #printPageButton {
-            display: none;
-        }
-    }
 </style>
 <?php
 
@@ -21,7 +16,7 @@
     {{"Declaration Print"}}
 @endsection
 @section('title-left')
-    <button id="printPageButton" class="btn btn-primary" onClick="window.print();">Print This Page</button>
+
 @endsection
 @section('title')
     @parent
@@ -77,14 +72,14 @@
         </tr>
         <tr>
             <td>Mode of Transportation</td>
-            <td>By {{$declaration->mode_of_transport}}</td>
+            <td>{{$declaration->mode_of_transport}}</td>
             <td>Visiting From</td>
             <td>{{$declaration->journey_from_country_name}}</td>
         </tr>
         <tr>
             <td>Arrival Date</td>
             <td>{{formatDate($declaration->arrival_date)}}</td>
-            <td>Staying at</td>
+            <td>Staying At</td>
             <td>{{$declaration->division_name." , ".$declaration->district_name}}</td>
         </tr>
     </table>
@@ -104,9 +99,9 @@
             <td>{{$declaration->second_vaccine_date}}</td>
         </tr>
         <tr>
-            <td>Negative In RT-PCR test in last 72 hours?</td>
-            <td>{{formatYesNo($declaration->is_rt_pcr_negative)}}</td>
-            <td>Declaration Created at</td>
+            <td>Has Taken RT-PCR</td>
+            <td>{{formatYesNo($declaration->has_taken_rt_pcr)}}</td>
+            <td>Declaration Created At</td>
             <td>{{formatDateTime($declaration->created_at)}}</td>
         </tr>
 
