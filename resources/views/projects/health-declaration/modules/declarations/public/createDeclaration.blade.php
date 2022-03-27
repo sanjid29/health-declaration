@@ -6,6 +6,15 @@
 
 @section('content')
 
+    <h4>
+        All information shall be kept confidential and will be used for Public Health purposes. The Ministry of Health & Family Welfare, Government of the
+        People’s Republic of Bangladesh mandatorily requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
+        form as a part of health screening at the port of entry.
+    </h4>
+    <h4>
+        সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
+        স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
+    </h4>
     <div class="card-body">
 
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
@@ -18,46 +27,38 @@
         @include('form.text',['var'=>['name'=>'email','label'=>'Email/ইমেইল', 'div'=>'col-sm-4']])
         <div class="clearfix"></div>
         @include('form.select-model',['var'=>['name'=>'country_code_mobile_number','label'=>'Country Code','div'=>'col-sm-4','name_field'=>'name','value_field'=>'calling_code', 'model'=>\App\Country::class,]])
-
         @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Phone No (With Country Code)/মোবাইল নম্বর', 'div'=>'col-sm-4']])
-
-
         <div class="clearfix"></div>
         <h4>Travel Information</h4>
-
         @include('form.select-array',['var'=>['name'=>'mode_of_transport','label'=>'Mode of Travel/পরিবহনের ধরণ', 'div'=>'col-sm-4','options'=>(\App\Declaration::$modeOfTransportTypes)]])
         @include('form.text',['var'=>['name'=>'flight_no','label'=>'(Flight No/Vehicle No)/(ফ্লাইট নম্বর/যানবাহন নম্বর)', 'div'=>'col-sm-4']])
-        @include('form.text',['var'=>['name'=>'seat_no','label'=>'Seat No/আসন নম্বর', 'div'=>'col-sm-4']])
-        {{--        @include('form.text',['var'=>['name'=>'port_entry','label'=>'(Port of Embarkation/Entry)/(যাত্রা/প্রবেশের বন্দর)', 'div'=>'col-sm-4']])--}}
+        @include('form.text',['var'=>['name'=>'seat_no','label'=>'Seat No/আসন নম্বর', 'div'=>'col-sm-4']]){{--        @include('form.text',['var'=>['name'=>'port_entry','label'=>'(Port of Embarkation/Entry)/(যাত্রা/প্রবেশের বন্দর)', 'div'=>'col-sm-4']])--}}
         @include('form.select-model',['var'=>['name'=>'journey_from_country_id','label'=>'Country of Origin of Travel/যে দেশ থেকে যাত্রা শুরু করেছেন','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
         @include('form.date',['var'=>['name'=>'arrival_date','label'=>'Date of Arrival/আগমনের তারিখ', 'div'=>'col-sm-4']])
-        {{--        @include('form.date',['var'=>['name'=>'departure_date','label'=>'Date of Departure/ প্রস্থানের তারিখ', 'div'=>'col-sm-4']])--}}
-        {{--        @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Countries visited within last 2 weeks(if any)/গত ২ সপ্তাহে যে সমস্ত দেশ ভ্রমন করেছেন(যদি কোন)','div'=>'col-sm-6','name_field'=>'name', 'model'=>\App\Country::class,]])--}}
+        @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited with last two (02) week (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
         <h4>Where are you staying in Bangladesh?/বাংলাদেশে অবস্থানকালীন ঠিকানা</h4>
+        @include('form.select-array',['var'=>['name'=>'address_type','label'=>'Rural Area/গ্রাম / Town/শহর', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])
+        <div class="clearfix"></div>
         @include('form.custom.division-district-upazila',['var'=>['prefixIdentifier'=>'','labelIdentifier'=>'']])
-        @include('form.text',['var'=>['name'=>'union','label'=>'Union/ইউনিয়ন', 'div'=>'col-sm-4']])
-        @include('form.text',['var'=>['name'=>'ward','label'=>'Ward/ওয়ার্ড', 'div'=>'col-sm-4']])
-        @include('form.text',['var'=>['name'=>'village','label'=>'Area/Village/Town/গ্রাম/মহল্লা/শহর', 'div'=>'col-sm-4']])
+        <div id="town">
+            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation/ইউনিয়ন', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'thana','label'=>'Thana/ওয়ার্ড', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'ward','label'=>'Ward/ওয়ার্ড', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'area','label'=>'Area/মহল্লা', 'div'=>'col-sm-4']])
+        </div>
+        <div id="rural">
+            @include('form.text',['var'=>['name'=>'union','label'=>'Union/ইউনিয়ন', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'village','label'=>'Village/গ্রাম', 'div'=>'col-sm-4']])
+        </div>
+        <div class="clearfix"></div>
         @include('form.text',['var'=>['name'=>'road','label'=>'Road', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'house','label'=>'House/বাড়ী', 'div'=>'col-sm-4']])
         <div class="clearfix"></div>
         <h4>Symptoms</h4>
-        @include('form.select-array',['var'=>['name'=>'has_sore_throat','label'=>'Sore Throat/গলাব্যাথা', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
-        @include('form.select-array',['var'=>['name'=>'has_fever','label'=>'Fever/জ্বর', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
-        @include('form.select-array',['var'=>['name'=>'has_headache','label'=>'Headache/মাথাব্যাথা', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
-        {{--        @include('form.select-array',['var'=>['name'=>'has_tiredness','label'=>'Tiredness/ক্লান্তি', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])--}}
-        @include('form.select-array',['var'=>['name'=>'has_cough','label'=>'Cough/কাশি', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
-        @include('form.select-array',['var'=>['name'=>'has_shortness_of_breath','label'=>'Shortness of Breath/শ্বাসকষ্ট', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
-        @include('form.select-array',['var'=>['name'=>'has_loss_of_taste_or_smell','label'=>'Loss of taste or smell/স্বাদ কিংবা গন্ধ না পাওয়া', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])
+        @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
         <div class="clearfix"></div>
         <h4>Covid 19 Information</h4>
-        {{--        @include('form.select-array',['var'=>['name'=>'has_covid','label'=>'Have you or any member of your group travelling with you, had a positive COVID-19 test in the last 3 days? /আপনি কিংবা আপনার ভ্রমনসঙ্গীদের মধ্যে কেউ গত তিন দিনের মধ্যে কোভিড-১৯ টেস্ট পজেটিভ ছিল কি না?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])--}}
-        <div class="clearfix"></div>
-        {{--        <h6>If yes provide the covid report with the form/কোভিড-১৯ টেস্ট পজেটিভ থাকলে এই ফরমের সাথে রিপোর্টটি জমা দিন</h6>--}}
-        <div class="clearfix"></div>
-        {{--        @include('form.select-array',['var'=>['name'=>'was_covid_affected','label'=>'Have you had a positive COVID-19 test? /আপনি কোভিড-১৯ টেস্ট পজেটিভ ছিল কি?', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])--}}
-        {{--        @include('form.date',['var'=>['name'=>'last_covid_affected_on','label'=>'Date of last Covid Positive Test/ সর্বশেষ কোভিড-১৯ পজেটিভ টেস্ট তারিখ', 'div'=>'col-sm-6']])--}}
         <div class="clearfix"></div>
         <h6>Information of Covid-19 Vaccination/আপনার কোভিড-১৯ টিকার তথ্য</h6>
         <div class="clearfix"></div>
@@ -69,8 +70,6 @@
             @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
             @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
             @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
-            @include('form.select-model',['var'=>['name'=>'secondary_vaccine_id','label'=>'Third Dose Vaccine\তৃতীয় ডোজ টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
-            @include('form.date',['var'=>['name'=>'third_vaccine_date','label'=>'Date of 3rd Dose/৩য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
             <div class="clearfix"></div>
         </div>
         <div id="rt-pcr-field">
@@ -112,6 +111,7 @@
             }
         });
         showVaccinationInfo();
+        fieldsBasedOnAddress();
 
         $('#healthDeclaration-form').validationEngine({
             prettySelect: true,
@@ -120,28 +120,21 @@
         });
 
         $("#healthDeclaration-form input[name=passenger_name]").addClass('validate[required]');
-        $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
-        $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
-        $("#healthDeclaration-form select[name=gender]").addClass('validate[required]');
-        $("#healthDeclaration-form input[name=nationality]").addClass('validate[required]');
-        //$("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
-        $("#healthDeclaration-form select[name=country_code_mobile_number]").addClass('validate[required]');
         $("#healthDeclaration-form input[name=passport_no]").addClass('validate[required]');
+        $("#healthDeclaration-form select[name=country_code_mobile_number]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=email]").addClass('validate[required,email]');
+        $("#healthDeclaration-form select[name=gender]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
+
         $("#healthDeclaration-form select[id=mode_of_transport]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=journey_from_country_id]").addClass('validate[required]');
-        //$("#healthDeclaration-form input[id=arrival_date]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=district_id]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=upazila_id]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=has_sore_throat]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=has_fever]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=has_headache]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=has_tiredness]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=has_cough]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=has_shortness_of_breath]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=has_loss_of_taste_or_smell]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=has_covid]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=was_covid_affected]").addClass('validate[required]');
+        $("#healthDeclaration-form input[id=road]").addClass('validate[required]');
+        $("#healthDeclaration-form input[id=house]").addClass('validate[required]');
+
+        $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
 
 
@@ -167,6 +160,25 @@
         function showVaccinationInfo() {
             viewVaccineInfo();
             $('select[name=is_vaccinated]').change(viewVaccineInfo);
+        }
+
+        function fieldsBasedOnAddress() {
+            showFieldsBasedOnAddress();
+            $('select[name=address_type]').change(showFieldsBasedOnAddress);
+        }
+
+        function showFieldsBasedOnAddress() {
+            $('#town').hide();
+            $('#rural').hide();
+            let addressType = $('select[name=address_type]').val();
+            if (addressType === 'rural') {
+                $('#rural').show();
+                $('#town').hide();
+
+            } else if (addressType === 'town') {
+                $('#town').show();
+                $('#rural').hide();
+            }
         }
 
     </script>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameHasTakenRtPcrToIsRtPcrNegativeInDeclarations extends Migration
+class AddAddressTypeInDeclarations extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,8 @@ class RenameHasTakenRtPcrToIsRtPcrNegativeInDeclarations extends Migration
     {
         Schema::table('declarations', function (Blueprint $table) {
             //
-            $table->renameColumn('origin_country_id','country_code_mobile_number');
+            $table->dropColumn('port_entry');
+            $table->string('address_type',255)->nullable()->default(null)->after('visited_country_names');
         });
     }
 
@@ -26,7 +27,7 @@ class RenameHasTakenRtPcrToIsRtPcrNegativeInDeclarations extends Migration
      */
     public function down()
     {
-        Schema::table('is_rt_pcr_negative_in_delcarations', function (Blueprint $table) {
+        Schema::table('declarations', function (Blueprint $table) {
             //
         });
     }

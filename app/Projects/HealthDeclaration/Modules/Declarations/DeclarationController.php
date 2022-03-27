@@ -73,27 +73,19 @@ class DeclarationController extends ModularController
         $validator = Validator::make(request()->all(), [
             'passenger_name' => 'required',
             'mobile_no' => 'required|numeric',
+            'passport_no' => 'required',
             'email' => 'email:rfc,dns,filter,strict',
             'passenger_dob' => 'required',
             'gender' => 'required',
-            //'arrival_date' => 'required',
             'country_code_mobile_number' => 'required',
-            'nationality' => 'required',
-            'passport_no' => 'required',
-            'flight_no' => 'required',
+
             'district_id' => 'required',
             'division_id' => 'required',
             'upazila_id' => 'required',
-            'has_sore_throat' => 'required',
-            'has_fever' => 'required',
-            'has_headache' => 'required',
-            // 'has_tiredness' => 'required',
-            'has_cough' => 'required',
-            'has_shortness_of_breath' => 'required',
-            'has_loss_of_taste_or_smell' => 'required',
-            // 'has_covid' => 'required',
-            // 'was_covid_affected' => 'required',
-            // 'last_covid_affected_on' => 'required_if:was_covid_affected,1',
+            'road' => 'required',
+            'house' => 'required',
+
+            'have_covid_symptoms' => 'required',
             'is_vaccinated' => 'required',
             'primary_vaccine_id' => 'required_if:is_vaccinated,1',
             'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
@@ -120,9 +112,7 @@ class DeclarationController extends ModularController
         if (request()->has('primary_vaccine_id') && request()->get('primary_vaccine_id')) {
             request()->merge(['primary_vaccine_name' => Vaccine::find(request()->get('primary_vaccine_id'))->name]);
         }
-        if (request()->has('secondary_vaccine_id') && request()->get('secondary_vaccine_id')) {
-            request()->merge(['secondary_vaccine_name' => Vaccine::find(request()->get('secondary_vaccine_id'))->name]);
-        }
+
 
         if (request()->has('is_vaccinated')) {
             $decision = $reason = $secondDoseDate=$fourteenDaysFlag=null;

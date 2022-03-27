@@ -28,39 +28,31 @@ class Declaration extends BaseModule
         'passport_no',
         'flight_no',
         'seat_no',
-        'port_entry',
         'mobile_no',
         'email',
         'arrival_date',
-        'departure_date',
         'nationality',
         'country_code_mobile_number',
-        'origin_country_name',
         'journey_from_country_id',
         'journey_from_country_name',
         'visited_country_ids',
         'visited_country_names',
+        'address_type',
         'division_id',
         'division_name',
         'district_id',
         'district_name',
         'upazila_id',
         'upazila_name',
-        'village',
+        'city_corporation',
         'union',
+        'village',
+        'thana',
         'ward',
+        'area',
         'road',
         'house',
-        'has_sore_throat',
-        'has_fever',
-        'has_headache',
-        'has_tiredness',
-        'has_cough',
-        'has_shortness_of_breath',
-        'has_loss_of_taste_or_smell',
-        'has_covid',
-        'was_covid_affected',
-        'last_covid_affected_on',
+        'have_covid_symptoms',
         'is_vaccinated',
         'is_rt_pcr_negative',
         'first_vaccine_date',
@@ -77,7 +69,7 @@ class Declaration extends BaseModule
     ];
 
     // protected $guarded = [];
-    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'first_vaccine_date', 'second_vaccine_date', 'arrival_date', 'departure_date'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'first_vaccine_date', 'second_vaccine_date', 'arrival_date',];
     protected $casts = [
         'visited_country_ids' => 'array',
     ];
@@ -104,6 +96,11 @@ class Declaration extends BaseModule
         'road' => 'By Road',
         'sea' => 'By Sea',
         'train' => 'By Train',
+    ];
+    public static $typeOfAddresses       = [
+        'rural' => 'Rural Area',
+        'town' => 'Town',
+
     ];
 
     /*

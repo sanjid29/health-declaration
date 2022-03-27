@@ -16,6 +16,7 @@ class RenameHasTakenRtPcrToIsRtPcrNegativeInDeclarations extends Migration
         Schema::table('declarations', function (Blueprint $table) {
             //
             $table->renameColumn('has_taken_rt_pcr','is_rt_pcr_negative');
+            $table->renameColumn('origin_country_id','country_code_mobile_number');
         });
     }
 
