@@ -38,12 +38,12 @@
         @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited with last two (02) week (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
         <h4>Where are you staying in Bangladesh?/বাংলাদেশে অবস্থানকালীন ঠিকানা</h4>
-        @include('form.select-array',['var'=>['name'=>'address_type','label'=>'Rural Area/গ্রাম / Town/শহর', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])
+        @include('form.select-array',['var'=>['name'=>'address_type','label'=>'(Rural Area/গ্রাম) / (Town/শহর)', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])
         <div class="clearfix"></div>
         @include('form.custom.division-district-upazila',['var'=>['prefixIdentifier'=>'','labelIdentifier'=>'']])
         <div id="town">
-            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation/ইউনিয়ন', 'div'=>'col-sm-4']])
-            @include('form.text',['var'=>['name'=>'thana','label'=>'Thana/ওয়ার্ড', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation/ সিটি কর্পোরেশন', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'thana','label'=>'Thana/থানা', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'ward','label'=>'Ward/ওয়ার্ড', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'area','label'=>'Area/মহল্লা', 'div'=>'col-sm-4']])
         </div>
@@ -52,7 +52,7 @@
             @include('form.text',['var'=>['name'=>'village','label'=>'Village/গ্রাম', 'div'=>'col-sm-4']])
         </div>
         <div class="clearfix"></div>
-        @include('form.text',['var'=>['name'=>'road','label'=>'Road', 'div'=>'col-sm-4']])
+        @include('form.text',['var'=>['name'=>'road','label'=>'Road/রাস্তা', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'house','label'=>'House/বাড়ী', 'div'=>'col-sm-4']])
         <div class="clearfix"></div>
         <h4>Symptoms</h4>
