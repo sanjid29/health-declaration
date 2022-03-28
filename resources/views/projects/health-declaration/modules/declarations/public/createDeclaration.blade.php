@@ -35,14 +35,14 @@
         @include('form.text',['var'=>['name'=>'seat_no','label'=>'Seat No/আসন নম্বর', 'div'=>'col-sm-4']]){{--        @include('form.text',['var'=>['name'=>'port_entry','label'=>'(Port of Embarkation/Entry)/(যাত্রা/প্রবেশের বন্দর)', 'div'=>'col-sm-4']])--}}
         @include('form.select-model',['var'=>['name'=>'journey_from_country_id','label'=>'Country of Origin of Travel/যে দেশ থেকে যাত্রা শুরু করেছেন','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
         @include('form.date',['var'=>['name'=>'arrival_date','label'=>'Date of Arrival/আগমনের তারিখ', 'div'=>'col-sm-4']])
-        @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited with last two (02) week (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
+        @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited within last two (02) weeks (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
         <h4>Where are you staying in Bangladesh?/বাংলাদেশে অবস্থানকালীন ঠিকানা</h4>
         @include('form.select-array',['var'=>['name'=>'address_type','label'=>'(Rural Area/গ্রাম) / (Town/শহর)', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])
         <div class="clearfix"></div>
         @include('form.custom.division-district-upazila',['var'=>['prefixIdentifier'=>'','labelIdentifier'=>'']])
         <div id="town">
-            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation/ সিটি কর্পোরেশন', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation / Municipality / সিটি কর্পোরেশন', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'thana','label'=>'Thana/থানা', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'ward','label'=>'Ward/ওয়ার্ড', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'area','label'=>'Area/মহল্লা', 'div'=>'col-sm-4']])
@@ -131,8 +131,6 @@
         $("#healthDeclaration-form select[id=journey_from_country_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=district_id]").addClass('validate[required]');
-        $("#healthDeclaration-form input[id=road]").addClass('validate[required]');
-        $("#healthDeclaration-form input[id=house]").addClass('validate[required]');
 
         $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');

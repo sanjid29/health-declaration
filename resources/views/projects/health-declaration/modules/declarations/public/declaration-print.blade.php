@@ -60,6 +60,10 @@
     <div class="clearfix"></div>
     <h4> Decision: {{$declaration->decision}}</h4>
     <div class="clearfix"></div>
+    @if(isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms=='Yes')
+        <h4>After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
+    @endif
+
     <h4>Personal Information</h4>
     <table class="table table-bordered no-padding" width="100%">
         <tr>

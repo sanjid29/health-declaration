@@ -79,11 +79,15 @@ class DeclarationController extends ModularController
             'gender' => 'required',
             'country_code_mobile_number' => 'required',
 
+            'address_type' => 'required',
             'district_id' => 'required',
             'division_id' => 'required',
-            'upazila_id' => 'required',
-            'road' => 'required',
-            'house' => 'required',
+
+            'village' => 'required_if:address_type,rural',
+            'upazila_id' => 'required_if:address_type,town',
+            'city_corporation' => 'required_if:address_type,town',
+
+
 
             'have_covid_symptoms' => 'required',
             'is_vaccinated' => 'required',
