@@ -60,7 +60,7 @@
     <div class="clearfix"></div>
     <h4> Decision: {{$declaration->decision}}</h4>
     <div class="clearfix"></div>
-    @if(isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms=='Yes')
+    @if(isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)
         <h4>After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
     @endif
 
