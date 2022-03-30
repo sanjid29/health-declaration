@@ -16,10 +16,8 @@ use App\Projects\HealthDeclaration\Modules\Uploads\UploadController;
 $modules = Mf::modules();
 $moduleGroups = Mf::moduleGroups();
 $middlewares = ['auth', 'verified', 'tenant'];
-Route::get('/', [DeclarationController::class,'createHealthDeclaration'])->name('declaration-form');
+
 Route::middleware($middlewares)->group(function () use ($modules, $moduleGroups) {
-
-
     Route::get('/home', 'HomeController@index')->name('home');
     // Note : Find the full list in app/Mainframe/routes/modules.php
     /*---------------------------------
@@ -77,7 +75,7 @@ Route::middleware($middlewares)->group(function () use ($modules, $moduleGroups)
 |---------------------------------*/
 
 // Todo : Write any public routes for your project
-
+Route::get('/', [DeclarationController::class,'createHealthDeclaration'])->name('declaration-form');
 Route::get('/createHealthDeclaration',[DeclarationController::class,'createHealthDeclaration'])->name('healthDeclaration-create');
 Route::post('/createHealthDeclaration',[DeclarationController::class,'healthDeclarationStore'])->name('healthDeclaration-store');
 Route::get('/postHealthDeclaration/{declaration}',[DeclarationController::class,'healthDeclarationPost'])->name('healthDeclaration-post');
