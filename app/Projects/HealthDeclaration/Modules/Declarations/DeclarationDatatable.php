@@ -36,9 +36,8 @@ class DeclarationDatatable extends ModuleDatatable
             [$this->table.'.passenger_name', 'passenger_name', 'Name'],
             [$this->table.'.passport_no', 'passport_no', 'Passport'],
             [$this->table.'.mode_of_transport', 'mode_of_transport', 'Mode Of Transport'],
-            [$this->table.'.journey_from_country_id', 'journey_from_country_id', 'Journey From'],
-            [$this->table.'.has_covid', 'has_covid', 'Has Covid'],
-            [$this->table.'.primary_vaccine_id', 'primary_vaccine_id', 'Vaccine'],
+            [$this->table.'.journey_from_country_name', 'journey_from_country_name', 'Journey From'],
+            [$this->table.'.primary_vaccine_name', 'primary_vaccine_name', 'Vaccine'],
             [$this->table.'.first_vaccine_date', 'first_vaccine_date', 'First Vaccine Date'],
             [$this->table.'.second_vaccine_date', 'second_vaccine_date', 'Second Vaccine Date'],
         ];
@@ -87,12 +86,6 @@ class DeclarationDatatable extends ModuleDatatable
         $dt = parent::modify($dt);
         // $dt->rawColumns(['id', 'email', 'is_active']); // Dynamically set HTML columns
 
-        if ($this->hasColumn('journey_from_country_id')) {
-            $dt->editColumn('journey_from_country_id', function ($row) { return optional($row->journeyFromCountry)->name; });
-        }
-        if ($this->hasColumn('primary_vaccine_id')) {
-            $dt->editColumn('primary_vaccine_id', function ($row) { return optional($row->primaryVaccine)->name; });
-        }
         if ($this->hasColumn('first_vaccine_date')) {
             $dt->editColumn('first_vaccine_date', function ($row) { return formatDate($row->first_vaccine_date); });
         }
