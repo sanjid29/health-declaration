@@ -8,10 +8,13 @@ use App\Division;
 use \App\Projects\HealthDeclaration\Features\Modular\ModularController\ModularController;
 use \App\Projects\HealthDeclaration\Features\Report\ModuleList;
 use App\Projects\HealthDeclaration\Helpers\Time;
+use App\Projects\HealthDeclaration\Mails\EmailToPassenger;
 use App\Upazila;
 use App\User;
 use App\Vaccine;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 use PDF;
 use Request;
 use View;
@@ -70,14 +73,20 @@ class DeclarationController extends ModularController
      */
     public function healthDeclarationStore()
     {
+
+        $threeDaysBefore=Carbon::now()->subDays(3);
+        $threeDaysAfter = Carbon::now()->addDays(3);
+
         $validator = Validator::make(request()->all(), [
             'passenger_name' => 'required',
             'mobile_no' => 'required|numeric',
             'passport_no' => 'required',
             'email' => 'email:rfc,dns,filter,strict',
             'passenger_dob' => 'required',
+            'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
             'gender' => 'required',
             'country_code_mobile_number' => 'required',
+            'mode_of_transport' => 'required',
 
             'address_type' => 'required',
             'district_id' => 'required',
@@ -156,9 +165,28 @@ class DeclarationController extends ModularController
         //Create user
         $declaration = Declaration::create(request()->all());
 
+        if(filter_var($declaration->email,FILTER_VALIDATE_EMAIL)){
+            if($declaration->decision=="You are Allowed to Travel"){
+                $content = null;
+                if (isset($declaration->id)) {
+                    $content .= route('declarations.show', $declaration->id);
+                }
+
+                $fileName = public_path(config('mainframe.config.upload_root'))."\pdfs\Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
+                $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
+                $pdf = PDF::loadView($view, [
+                    'declaration' => $declaration,
+                    'content' => $content,
+                ]);
+                $pdf->save($fileName);
+            }
+            Mail::to($declaration->email)
+                ->queue(new EmailToPassenger($declaration));
+        }
+
         // $this->success('Verify your email and log in.');
 
-        $this->success('Declaration has been created');
+        // $this->success('Declaration has been created');
 
         return $this->redirect(route('healthDeclaration-post', $declaration));
     }

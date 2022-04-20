@@ -30,6 +30,7 @@ class Declaration extends BaseModule
         'seat_no',
         'mobile_no',
         'email',
+        'start_date',
         'arrival_date',
         'nationality',
         'country_code_mobile_number',
