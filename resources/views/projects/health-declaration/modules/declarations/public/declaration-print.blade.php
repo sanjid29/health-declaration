@@ -1,4 +1,4 @@
-@extends('projects.health-declaration.layouts.pdf-print.template')
+@extends('projects.health-declaration.layouts.print.template')
 <style type="text/css">
 
     table {
