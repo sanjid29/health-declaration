@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
 </head>
 <body class="hold-transition login-page lb-bg">
-<div class="container content-wrapper">
+<div class="container" style="background-color: white">
     <div class="row">
         <table class="no-border no-padding" width="100%">
             <tr>

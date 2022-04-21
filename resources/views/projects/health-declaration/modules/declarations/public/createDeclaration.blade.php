@@ -1,6 +1,8 @@
 @extends('projects.health-declaration.layouts.centered.template-form')
 <?php
 /** @var \App\Mainframe\Modules\Groups\Group $group */
+    // If you face any difficulty filling up the form, please call 017********
+    // ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 017******** নাম্বারে ফোন করুন।
 ?>
 
 
@@ -10,12 +12,12 @@
         All information shall be kept confidential and will be used for Public Health purposes. The Ministry of Health & Family Welfare, Government of the
         People’s Republic of Bangladesh mandatorily requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
         form as a part of health screening at the port of entry.
-        If you face any difficulty filling up the form, please call 017********
+
     </h4>
     <h4>
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
-        ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 017******** নাম্বারে ফোন করুন।
+
     </h4>
     <div class="card-body">
 
