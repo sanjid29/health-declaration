@@ -81,14 +81,14 @@
         </tr>
         <tr>
             <td>Mode of Transportation</td>
-            <td>By {{$declaration->mode_of_transport}}</td>
+            <td>{{ucwords($declaration->mode_of_transport)}}</td>
             <td>Visiting From</td>
             <td>{{$declaration->journey_from_country_name}}</td>
         </tr>
         <tr>
-            <td>Arrival Date</td>
-            <td>{{formatDate($declaration->arrival_date)}}</td>
-            <td>Staying at</td>
+            <td>Journey Starting Date</td>
+            <td>{{formatDate($declaration->start_date)}}</td>
+            <td>Staying At</td>
             <td>{{$declaration->division_name." , ".$declaration->district_name}}</td>
         </tr>
     </table>
