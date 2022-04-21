@@ -31,7 +31,7 @@ class EmailToPassenger extends Mailable implements ShouldQueue
         $message="You are Not allowed to Travel";
         if($this->declaration->decision=="You are Allowed to Travel"){
             $fileName = "Health Declaration-".$this->declaration->passenger_name.".pdf";
-            $pdfLocation = public_path(config('mainframe.config.upload_root'))."\pdfs\Declaration of-".$this->declaration->passenger_name." on ".formatDate($this->declaration->created_at).".pdf";
+            $pdfLocation = public_path(config('mainframe.config.upload_root'))."Declaration of-".$this->declaration->passenger_name." on ".formatDate($this->declaration->created_at).".pdf";
             $message="You are allowed to Travel, Please download the attachment and show in the airport";
             $data=[
                 'declaration'=>$this->declaration,

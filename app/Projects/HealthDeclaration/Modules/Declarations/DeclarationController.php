@@ -172,7 +172,7 @@ class DeclarationController extends ModularController
                     $content .= route('declarations.show', $declaration->id);
                 }
 
-                $fileName = public_path(config('mainframe.config.upload_root'))."\pdfs\Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
+                $fileName = public_path(config('mainframe.config.upload_root'))."Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
                 $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
                 $pdf = PDF::loadView($view, [
                     'declaration' => $declaration,
