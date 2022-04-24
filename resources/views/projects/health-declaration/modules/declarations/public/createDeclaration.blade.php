@@ -17,8 +17,10 @@
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
     </h4>
-    <h4 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টা আগে ফর্মটি
-        পূরণ করতে হবে </h4>
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টা আগে ফর্মটি
+        পূরণ করতে হবে </h5>
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Not Applicable for kids of twelve or less years old/ বারো বা তার কম বয়সী বাচ্চাদের জন্য
+        প্রযোজ্য নয় </h5>
     <div class="card-body">
 
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
