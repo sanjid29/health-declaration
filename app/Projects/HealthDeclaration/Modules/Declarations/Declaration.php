@@ -53,6 +53,7 @@ class Declaration extends BaseModule
         'area',
         'road',
         'house',
+        'local_contact_no',
         'have_covid_symptoms',
         'is_vaccinated',
         'is_rt_pcr_negative',

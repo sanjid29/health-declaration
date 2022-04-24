@@ -1,7 +1,7 @@
 @extends('projects.health-declaration.layouts.centered.template-form')
 <?php
 /** @var \App\Mainframe\Modules\Groups\Group $group */
-    // If you face any difficulty filling up the form, please call 017********
+    //
     // ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 017******** নাম্বারে ফোন করুন।
 ?>
 
@@ -12,12 +12,14 @@
         All information shall be kept confidential and will be used for Public Health purposes. The Ministry of Health & Family Welfare, Government of the
         People’s Republic of Bangladesh mandatorily requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
         form as a part of health screening at the port of entry.
-
+        <br>
+        If you face any difficulty filling up the form, please call 01769954137.
     </h4>
     <h4>
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
-
+        <br>
+        ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে ০১৭৬৯৯৫৪১৩৭ নাম্বারে ফোন করুন।
     </h4>
     <div class="card-body">
 
@@ -30,8 +32,8 @@
         @include('form.text',['var'=>['name'=>'nationality','label'=>'Nationality/জাতীয়তা', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'email','label'=>'Email/ইমেইল', 'div'=>'col-sm-4']])
         <div class="clearfix"></div>
-        @include('form.select-model',['var'=>['name'=>'country_code_mobile_number','label'=>'Country Code *','div'=>'col-sm-4','name_field'=>'name','value_field'=>'calling_code', 'model'=>\App\Country::class,]])
-        @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Phone No (With Country Code)/মোবাইল নম্বর *', 'div'=>'col-sm-4']])
+        @include('form.select-model',['var'=>['name'=>'country_code_mobile_number','label'=>'Country Code *','div'=>'col-sm-4','name_field'=>'calling_code_with_country','value_field'=>'calling_code', 'model'=>\App\Country::class,]])
+        @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Phone No/মোবাইল নম্বর *', 'div'=>'col-sm-4']])
         <div class="clearfix"></div>
         <h4>Travel Information</h4>
         @include('form.select-array',['var'=>['name'=>'mode_of_transport','label'=>'Mode of Travel/পরিবহনের ধরণ *', 'div'=>'col-sm-4','options'=>(\App\Declaration::$modeOfTransportTypes)]])
@@ -61,6 +63,8 @@
         <div class="clearfix"></div>
         @include('form.text',['var'=>['name'=>'road','label'=>'Road/রাস্তা', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'house','label'=>'House/বাড়ী', 'div'=>'col-sm-4']])
+        @include('form.number',['var'=>['name'=>'local_contact_no','label'=>'Local Phone No/স্থানীয় মোবাইল নম্বর *', 'div'=>'col-sm-4']])
+
         <div class="clearfix"></div>
         <h4>Symptoms</h4>
         @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে? *', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
@@ -75,13 +79,15 @@
             <h6>If Yes, show Covid-19 Vaccination Certificate and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
             <div class="clearfix"></div>
             @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
-            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
-            @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
-            <div class="clearfix"></div>
+            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ *', 'div'=>'col-sm-3']])
+            <div id="second_vaccine">
+                @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
+            </div>
+           <div class="clearfix"></div>
         </div>
         <div id="rt-pcr-field">
             <div class="clearfix"></div>
-            @include('form.select-array',['var'=>['name'=>'is_rt_pcr_negative','label'=>'Do you have Covid19 rt-PCR negative report within 72 hours of Travel? /আপনার কি ৭২ ঘন্টা মেয়াদী কোভিড-১৯ আরটিপিসিআর নেগেটিভ সনদ রয়েছে?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
+            @include('form.select-array',['var'=>['name'=>'is_rt_pcr_negative','label'=>'Do you have Covid19 rt-PCR negative report within 72 hours of Travel? /আপনার কি ৭২ ঘন্টা মেয়াদী কোভিড-১৯ আরটিপিসিআর নেগেটিভ সনদ রয়েছে? *', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
             <div class="clearfix"></div>
             <h6>If Yes, show rt-PCR test result and submit one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
         </div>
@@ -117,6 +123,7 @@
                 $('#divSubmit').show();
             }
         });
+        showVaccineSecondDose();
         showVaccinationInfo();
         fieldsBasedOnAddress();
         $('#healthDeclaration-form').validationEngine({
@@ -125,23 +132,25 @@
             scroll: true
         });
 
-        // $("#healthDeclaration-form input[name=passenger_name]").addClass('validate[required]');
-        // $("#healthDeclaration-form input[name=passport_no]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[name=country_code_mobile_number]").addClass('validate[required]');
-        // $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
-        // $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
-        // $("#healthDeclaration-form select[name=gender]").addClass('validate[required]');
-        // $("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
-        //
-        // $("#healthDeclaration-form input[name=start_date]").addClass('validate[required]');
-        //
-        // $("#healthDeclaration-form select[id=mode_of_transport]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=journey_from_country_id]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=district_id]").addClass('validate[required]');
-        //
-        // $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
-        // $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=passenger_name]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=passport_no]").addClass('validate[required]');
+        $("#healthDeclaration-form select[name=country_code_mobile_number]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
+        $("#healthDeclaration-form select[name=gender]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
+
+        $("#healthDeclaration-form input[name=start_date]").addClass('validate[required]');
+
+        $("#healthDeclaration-form select[id=mode_of_transport]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=journey_from_country_id]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=district_id]").addClass('validate[required]');
+
+
+        $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=local_contact_no]").addClass('validate[required]');
 
 
         function viewVaccineInfo() {
@@ -166,6 +175,15 @@
         function showVaccinationInfo() {
             viewVaccineInfo();
             $('select[name=is_vaccinated]').change(viewVaccineInfo);
+        }
+
+        function showVaccineSecondDose(){
+            $('select[name=primary_vaccine_id]').change(function (){
+                $('#second_vaccine').show();
+               if($('select[name=primary_vaccine_id]').val()==='7'){
+                   $('#second_vaccine').hide();
+               };
+            });
         }
 
         function fieldsBasedOnAddress() {

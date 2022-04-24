@@ -91,6 +91,7 @@ class DeclarationController extends ModularController
             'address_type' => 'required',
             'district_id' => 'required',
             'division_id' => 'required',
+            'local_contact_no' => 'required',
 
             'village' => 'required_if:address_type,rural',
             'upazila_id' => 'required_if:address_type,town',

@@ -18,6 +18,7 @@ $declaration = $element;
 @section('content-top')
 
     <a class="btn btn-primary" href="{{route('healthDeclaration-print',$declaration->id)}}" target="_blank" style="color:white">View PDF</a>
+    <a class="btn btn-primary" href="{{route('healthDeclaration-pdf',$declaration->id)}}" target="_blank" style="color:white">Download Form</a>
 
 @endsection
 
@@ -69,6 +70,8 @@ $declaration = $element;
             <div class="clearfix"></div>
             @include('form.text',['var'=>['name'=>'road','label'=>'Road', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'house','label'=>'House/বাড়ী', 'div'=>'col-sm-4']])
+            @include('form.number',['var'=>['name'=>'local_contact_no','label'=>'Local Phone No/স্থানীয় মোবাইল নম্বর *', 'div'=>'col-sm-4']])
+
             <div class="clearfix"></div>
             <h4>Symptoms</h4>
             @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
