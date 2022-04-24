@@ -1,8 +1,8 @@
 @extends('projects.health-declaration.layouts.centered.template-form')
 <?php
 /** @var \App\Mainframe\Modules\Groups\Group $group */
-    //
-    // ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 017******** নাম্বারে ফোন করুন।
+//
+// ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 017******** নাম্বারে ফোন করুন।
 ?>
 
 
@@ -12,15 +12,13 @@
         All information shall be kept confidential and will be used for Public Health purposes. The Ministry of Health & Family Welfare, Government of the
         People’s Republic of Bangladesh mandatorily requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
         form as a part of health screening at the port of entry.
-        <br>
-        If you face any difficulty filling up the form, please call 01769954137.
     </h4>
     <h4>
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
-        <br>
-        ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে ০১৭৬৯৯৫৪১৩৭ নাম্বারে ফোন করুন।
     </h4>
+    <h4 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টা আগে ফর্মটি
+        পূরণ করতে হবে </h4>
     <div class="card-body">
 
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
@@ -40,7 +38,7 @@
         @include('form.text',['var'=>['name'=>'flight_no','label'=>'(Flight No/Vehicle No)/(ফ্লাইট নম্বর/যানবাহন নম্বর)', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'seat_no','label'=>'Seat No/আসন নম্বর', 'div'=>'col-sm-4']]){{--        @include('form.text',['var'=>['name'=>'port_entry','label'=>'(Port of Embarkation/Entry)/(যাত্রা/প্রবেশের বন্দর)', 'div'=>'col-sm-4']])--}}
         @include('form.select-model',['var'=>['name'=>'journey_from_country_id','label'=>'Country of Origin of Travel/যে দেশ থেকে যাত্রা শুরু করেছেন','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
-       <div class="clearfix"></div>
+        <div class="clearfix"></div>
         @include('form.date',['var'=>['name'=>'arrival_date','label'=>'Date of Arrival/আগমনের তারিখ', 'div'=>'col-sm-4']])
         @include('form.datetime',['var'=>['name'=>'start_date','label'=>'Departure Date from Country of Origin of Travel/যাত্রা শুরু তারিখ*', 'div'=>'col-sm-6']])
 
@@ -83,7 +81,7 @@
             <div id="second_vaccine">
                 @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])
             </div>
-           <div class="clearfix"></div>
+            <div class="clearfix"></div>
         </div>
         <div id="rt-pcr-field">
             <div class="clearfix"></div>
@@ -109,6 +107,9 @@
         </div>
 
         {{ Form::close() }}
+
+        <h5> If you face any difficulty filling up the form, please call 01769954137 /ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে ০১৭৬৯৯৫৪১৩৭
+            নাম্বারে ফোন করুন।</h5>
 
     </div>
 
@@ -173,12 +174,13 @@
             $('select[name=is_vaccinated]').change(viewVaccineInfo);
         }
 
-        function showVaccineSecondDose(){
-            $('select[name=primary_vaccine_id]').change(function (){
+        function showVaccineSecondDose() {
+            $('select[name=primary_vaccine_id]').change(function () {
                 $('#second_vaccine').show();
-               if($('select[name=primary_vaccine_id]').val()==='7'){
-                   $('#second_vaccine').hide();
-               };
+                if ($('select[name=primary_vaccine_id]').val() === '7') {
+                    $('#second_vaccine').hide();
+                }
+                ;
             });
         }
 
