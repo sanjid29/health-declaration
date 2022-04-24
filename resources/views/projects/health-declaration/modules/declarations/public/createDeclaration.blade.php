@@ -138,16 +138,13 @@
         $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
         $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
         $("#healthDeclaration-form select[name=gender]").addClass('validate[required]');
-        $("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
+        //$("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
         $("#healthDeclaration-form input[id=local_contact_no]").addClass('validate[required]');
-        $("#healthDeclaration-form input[name=start_date]").addClass('validate[required]');
-
+        //$("#healthDeclaration-form input[name=start_date]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=mode_of_transport]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=journey_from_country_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
         // $("#healthDeclaration-form select[id=district_id]").addClass('validate[required]');
-
-
         $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
 
