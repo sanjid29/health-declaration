@@ -150,7 +150,7 @@
 
         $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
-        $("#healthDeclaration-form select[id=local_contact_no]").addClass('validate[required]');
+        $("#healthDeclaration-form input[id=local_contact_no]").addClass('validate[required]');
 
 
         function viewVaccineInfo() {
