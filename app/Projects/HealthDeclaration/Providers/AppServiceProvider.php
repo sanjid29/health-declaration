@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected $commands = [
         \App\Projects\HealthDeclaration\Commands\DoSomething::Class,
+        \App\Projects\HealthDeclaration\Commands\DeletePdfFiles::Class,
 
     ];
 

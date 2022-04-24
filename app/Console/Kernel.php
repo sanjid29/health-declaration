@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')->hourly();
         $schedule->command('telescope:clear')->daily();
         $schedule->command('mainframe:clean-deleted-uploads')->daily();
+        $schedule->command('health-declaration:delete-pdf')->dailyAt('22:00');
     }
 
     /**
