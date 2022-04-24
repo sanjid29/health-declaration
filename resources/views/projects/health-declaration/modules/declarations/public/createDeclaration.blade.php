@@ -157,13 +157,13 @@
                 $('#vaccination-info').show();
                 $('#rt-pcr-field').hide();
                 $("#healthDeclaration-form select[id=primary_vaccine_id]").addClass('validate[required]');
-                $("#healthDeclaration-form input[id=has_taken_rt_pcr]").removeClass('validate[required]');
+                $("#healthDeclaration-form select[id=is_rt_pcr_negative]").removeClass('validate[required]');
 
             } else if (isVaccinated === '0') {
                 $('#rt-pcr-field').show();
                 $('#vaccination-info').hide();
                 $("#healthDeclaration-form select[id=primary_vaccine_id]").removeClass('validate[required]');
-                $("#healthDeclaration-form input[id=has_taken_rt_pcr]").addClass('validate[required]');
+                $("#healthDeclaration-form select[id=is_rt_pcr_negative]").addClass('validate[required]');
 
             }
         }

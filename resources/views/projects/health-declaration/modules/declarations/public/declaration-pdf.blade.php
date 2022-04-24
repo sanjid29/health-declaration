@@ -9021,7 +9021,7 @@ works properly when clicked or hovered */
         </tr>
         <tr>
             <td>Has Taken RT-PCR</td>
-            <td>{{formatYesNo($declaration->has_taken_rt_pcr)}}</td>
+            <td>{{formatYesNo($declaration->is_rt_pcr_negative)}}</td>
             <td>Declaration Created At</td>
             <td>{{formatDateTime($declaration->created_at)}}</td>
         </tr>
