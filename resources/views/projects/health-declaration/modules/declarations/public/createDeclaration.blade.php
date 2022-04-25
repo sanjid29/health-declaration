@@ -1,7 +1,7 @@
 @extends('projects.health-declaration.layouts.centered.template-form')
 <?php
 /** @var \App\Mainframe\Modules\Groups\Group $group */
-//
+
 // ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 017******** নাম্বারে ফোন করুন।
 ?>
 
@@ -17,7 +17,7 @@
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
     </h4>
-    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টা আগে ফর্মটি
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled within 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টার মধ্যে ফর্মটি
         পূরণ করতে হবে </h5>
     <h5 style="color:green !important;padding: 5px; font-weight: 600;">Not Applicable for kids of twelve or less years old/ বারো বা তার কম বয়সী বাচ্চাদের জন্য
         প্রযোজ্য নয় </h5>
