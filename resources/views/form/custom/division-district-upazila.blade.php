@@ -31,8 +31,9 @@ if (!isset($var['labelIdentifier'])) {
             var url = '{{route('districts.list-json',['is_active'=>'1','force_all_data'=>'yes'])}}';
             parentSelect.select2();
             childSelect.select2();
-            // childSelect.select2("val", "").empty().select2('enable', false);
-            $("select[name=district_id]").select2("val", "").empty().select2('enable', false);
+
+            // $("select[name=district_id]").select2("val", "").empty().select2('enable', false);
+            childSelect.select2('enable', false);
             parentSelect.on('change', function () { // https://select2.github.io/select2/ > Events
                 var childOldValue = childSelect.select2('val'); // Temprarily store value to assign after ajax loading
                 childSelect.select2("val", "").empty().select2('enable', false); // Clear and disable child
@@ -64,8 +65,9 @@ if (!isset($var['labelIdentifier'])) {
             division.select2();
             parentSelect.select2();
             childSelect.select2();
-            // childSelect.select2("val", "").empty().select2('enable', false);
-            $("select[name=upazila_id]").select2("val", "").empty().select2('enable', false);
+            //childSelect.select2("val", "").empty().select2('enable', false);
+            //$("select[name=upazila_id]").select2("val", "").empty().select2('enable', false);
+            childSelect.select2('enable', false);
             parentSelect.on('change', function () { // https://select2.github.io/select2/ > Events
                 var childOldValue = childSelect.select2('val'); // Temprarily store value to assign after ajax loading
                 childSelect.select2("val", "").empty().select2('enable', false); // Clear and disable child
