@@ -21,6 +21,8 @@
         পূরণ করতে হবে </h5>
     <h5 style="color:green !important;padding: 5px; font-weight: 600;">Not Applicable for kids of twelve or less years old/ বারো বা তার কম বয়সী বাচ্চাদের জন্য
         প্রযোজ্য নয় </h5>
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Except for Janssen (Jhonson & Jhonson), other vaccines must have two doses to be considered completed / Janssen (Jhonson & Jhonson) ব্যতীত, অন্যান্য টিকা সম্পূর্ণ বলে বিবেচনা করার জন্য দুটি ডোজ থাকতে হবে </h5>
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;"> If Vaccine is not completed, RT-PCR negative form must be filled / ভ্যাকসিন সম্পূর্ণ না হলে, RT-PCR নেগেটিভ ফর্ম অবশ্যই পূরণ করতে হবে </h5>
     <div class="card-body">
 
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
@@ -76,7 +78,7 @@
         @include('form.select-array',['var'=>['name'=>'is_vaccinated','label'=>'Have you taken Vaccination for COVID-19? /আপনি কি কোভিড-১৯ এর জন্য টিকা নিয়েছেন? *', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])
         <div class="clearfix"></div>
         <div id="vaccination-info">
-            <h6>If Yes, show Covid-19 Vaccination Certificate and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+            <h6>If Yes, show Covid-19 Vaccination Card and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
             <div class="clearfix"></div>
             @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
             @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ *', 'div'=>'col-sm-3','class'=>'readonly']])
