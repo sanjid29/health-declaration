@@ -30,7 +30,7 @@
         @include('form.text',['var'=>['name'=>'passenger_name','label'=>'Passenger Name/যাত্রীর নাম *', 'div'=>'col-sm-12']])
         @include('form.text',['var'=>['name'=>'passport_no','label'=>'Passport No/পাসপোর্ট নম্বর *', 'div'=>'col-sm-4']])
         @include('form.select-array',['var'=>['name'=>'gender','label'=>'Gender/লিঙ্গ*', 'div'=>'col-sm-4','options'=>(\App\Declaration::$genderTypes)]])
-        @include('form.date',['var'=>['name'=>'passenger_dob','label'=>'Date of Birth/ জন্ম তারিখ*', 'div'=>'col-sm-4','class'=>'readonly']])
+        @include('form.date',['var'=>['name'=>'passenger_dob','label'=>'Date of Birth/ জন্ম তারিখ*', 'div'=>'col-sm-4','class'=>'readonly','placeholder'=>'dd-mm-yyyy']])
         @include('form.text',['var'=>['name'=>'nationality','label'=>'Nationality/জাতীয়তা', 'div'=>'col-sm-4']])
         @include('form.text',['var'=>['name'=>'email','label'=>'Email/ইমেইল', 'div'=>'col-sm-4']])
         <div class="clearfix"></div>
@@ -43,8 +43,8 @@
         @include('form.text',['var'=>['name'=>'seat_no','label'=>'Seat No/আসন নম্বর', 'div'=>'col-sm-4']]){{--        @include('form.text',['var'=>['name'=>'port_entry','label'=>'(Port of Embarkation/Entry)/(যাত্রা/প্রবেশের বন্দর)', 'div'=>'col-sm-4']])--}}
         @include('form.select-model',['var'=>['name'=>'journey_from_country_id','label'=>'Country of Origin of Travel/যে দেশ থেকে যাত্রা শুরু করেছেন','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
-        @include('form.date',['var'=>['name'=>'arrival_date','label'=>'Date of Arrival/আগমনের তারিখ', 'div'=>'col-sm-4','class'=>'readonly']])
-        @include('form.datetime',['var'=>['name'=>'start_date','label'=>'Departure Date from Country of Origin of Travel/যাত্রা শুরু তারিখ*', 'div'=>'col-sm-6','class'=>'readonly']])
+        @include('form.date',['var'=>['name'=>'arrival_date','label'=>'Date of Arrival/আগমনের তারিখ', 'div'=>'col-sm-4','class'=>'readonly','placeholder'=>'dd-mm-yyyy']])
+        @include('form.datetime',['var'=>['name'=>'start_date','label'=>'Departure Date from Country of Origin of Travel/যাত্রা শুরু তারিখ*', 'div'=>'col-sm-6','class'=>'readonly','placeholder'=>'dd-mm-yyyy h:m:s']])
 
         @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited within last two (02) weeks (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
@@ -81,9 +81,9 @@
             <h6>If Yes, show Covid-19 Vaccination Card and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
             <div class="clearfix"></div>
             @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
-            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ *', 'div'=>'col-sm-3','class'=>'readonly']])
+            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ *', 'div'=>'col-sm-3','class'=>'readonly','placeholder'=>'dd-mm-yyyy']])
             <div id="second_vaccine">
-                @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3','class'=>'readonly']])
+                @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3','class'=>'readonly','placeholder'=>'dd-mm-yyyy']])
             </div>
             <div class="clearfix"></div>
         </div>
