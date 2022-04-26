@@ -51,14 +51,14 @@
         <div class="clearfix"></div>
         @include('form.custom.division-district-upazila',['var'=>['prefixIdentifier'=>'','labelIdentifier'=>'']])
         <div id="town">
-            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation / Municipality / সিটি কর্পোরেশন', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation / Municipality / সিটি কর্পোরেশন *', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'thana','label'=>'Thana/থানা', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'ward','label'=>'Ward/ওয়ার্ড', 'div'=>'col-sm-4']])
             @include('form.text',['var'=>['name'=>'area','label'=>'Area/মহল্লা', 'div'=>'col-sm-4']])
         </div>
         <div id="rural">
             @include('form.text',['var'=>['name'=>'union','label'=>'Union/ইউনিয়ন', 'div'=>'col-sm-4']])
-            @include('form.text',['var'=>['name'=>'village','label'=>'Village/গ্রাম', 'div'=>'col-sm-4']])
+            @include('form.text',['var'=>['name'=>'village','label'=>'Village/গ্রাম *', 'div'=>'col-sm-4']])
         </div>
         <div class="clearfix"></div>
         @include('form.text',['var'=>['name'=>'road','label'=>'Road/রাস্তা', 'div'=>'col-sm-4']])
@@ -79,7 +79,7 @@
             <h6>If Yes, show Covid-19 Vaccination Certificate and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
             <div class="clearfix"></div>
             @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])
-            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ *', 'div'=>'col-sm-3']])
+            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ *', 'div'=>'col-sm-3','class'=>'readonly']])
             <div id="second_vaccine">
                 @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3','class'=>'readonly']])
             </div>
@@ -153,17 +153,14 @@
 
 
         function viewVaccineInfo() {
-            $('#rt-pcr-field').hide();
             $('#vaccination-info').hide();
             let isVaccinated = $('select[name=is_vaccinated]').val();
             if (isVaccinated === '1') {
                 $('#vaccination-info').show();
-                $('#rt-pcr-field').hide();
                 $("#healthDeclaration-form select[id=primary_vaccine_id]").addClass('validate[required]');
                 $("#healthDeclaration-form select[id=is_rt_pcr_negative]").removeClass('validate[required]');
 
             } else if (isVaccinated === '0') {
-                $('#rt-pcr-field').show();
                 $('#vaccination-info').hide();
                 $("#healthDeclaration-form select[id=primary_vaccine_id]").removeClass('validate[required]');
                 $("#healthDeclaration-form select[id=is_rt_pcr_negative]").addClass('validate[required]');
@@ -198,10 +195,12 @@
             if (addressType === 'rural') {
                 $('#rural').show();
                 $('#town').hide();
+                $('#label_upazila_id').html('Upazila/Thana/উপজেলা ')
 
             } else if (addressType === 'town') {
                 $('#town').show();
                 $('#rural').hide();
+                $('#label_upazila_id').html('Upazila/Thana/উপজেলা *')
             }
         }
 

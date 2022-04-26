@@ -74,7 +74,7 @@ class DeclarationController extends ModularController
     public function healthDeclarationStore()
     {
 
-        $threeDaysBefore=Carbon::now()->subDays(3);
+        $threeDaysBefore = Carbon::now()->subDays(3);
         $threeDaysAfter = Carbon::now()->addDays(3);
 
         $validator = Validator::make(request()->all(), [
@@ -127,47 +127,46 @@ class DeclarationController extends ModularController
             request()->merge(['primary_vaccine_name' => Vaccine::find(request()->get('primary_vaccine_id'))->name]);
         }
 
-
-        if (request()->has('is_vaccinated')) {
-            $decision = $reason = $secondDoseDate=$fourteenDaysFlag=null;
-            $isVaccinated = request()->get('is_vaccinated');
-            $hasRtPCRNegative = request()->get('is_rt_pcr_negative');
-            if(request()->get('second_vaccine_date')){
-                $secondDoseDate=request()->get('second_vaccine_date');
-                $fourteenDaysFlag=false;
-                if(Time::differenceInDays($secondDoseDate,now())>14){
-                    $fourteenDaysFlag=true;
-                }
-            }
-
-
-            if ($isVaccinated) {
-                if (request()->get('primary_vaccine_id') == '7' && request()->get('first_vaccine_date')) {
-                    $decision = "You are Allowed to Travel";
-                    $reason = "The user has completed Vaccination.";
-                } elseif (request()->get('primary_vaccine_id') && request()->get('first_vaccine_date') && request()->get('second_vaccine_date') && $fourteenDaysFlag) {
-                    $decision = "You are Allowed to Travel";
-                    $reason = "The user has completed Vaccination.";
-                } else{
-                    $decision = "You are not Allowed to Travel";
-                    $reason = "The user has not completed vaccination,he does not have both vaccine dates or 14 days has not passed from the second vaccination date";
-                }
-
-            } elseif ($hasRtPCRNegative) {
-                $decision = "You are Allowed to Travel";
-                $reason = "The user has not taken Vaccination but he/she has taken RT-PCR test and was negative in the last 72 hours.";
+        $isVaccinated = request()->get('is_vaccinated');
+        $hasRtPCRNegative = request()->get('is_rt_pcr_negative');
+        $decision = $reason = $dateToCompare = null;
+        $vaccineComplete = false;
+        if ($isVaccinated) {
+            if (request()->get('primary_vaccine_id') == '7') {
+                $dateToCompare = request()->get('first_vaccine_date');
             } else {
-                $reason = "The user has not taken Vaccination and he/she has taken RT-PCR and was positive in the last 72 hours.";
-                $decision = "You are Not Allowed to Travel";
+                $dateToCompare = request()->get('second_vaccine_date');
             }
-            request()->merge(['decision' => $decision, 'remark' => $reason]);
+            if ($dateToCompare) {
+                $fourteenDaysFlag = false;
+                if (Time::differenceInDays($dateToCompare, now()) > 14) {
+                    $fourteenDaysFlag = true;
+                }
+            }
+            if (request()->get('primary_vaccine_id') == '7' && request()->get('first_vaccine_date')) {
+                $vaccineComplete = true;
+            } elseif (in_array(request()->get('primary_vaccine_id'),['1','2','3','4','5','6','8']) && request()->get('first_vaccine_date') && request()->get('second_vaccine_date') && $fourteenDaysFlag) {
+                $vaccineComplete = true;
+            }
         }
+
+        if ($vaccineComplete) {
+            $decision = "You are Allowed to Travel";
+            $reason = "The user has completed Vaccination.";
+        } elseif ($hasRtPCRNegative) {
+            $decision = "You are Allowed to Travel";
+            $reason = "The user has completed Vaccination.";
+        } else {
+            $reason = "The user has not taken Vaccination and he/she has taken RT-PCR and was positive in the last 72 hours.";
+            $decision = "You are Not Allowed to Travel";
+        }
+        request()->merge(['decision' => $decision, 'remark' => $reason]);
 
         //Create user
         $declaration = Declaration::create(request()->all());
 
-        if(filter_var($declaration->email,FILTER_VALIDATE_EMAIL)){
-            if($declaration->decision=="You are Allowed to Travel"){
+        if (filter_var($declaration->email, FILTER_VALIDATE_EMAIL)) {
+            if ($declaration->decision == "You are Allowed to Travel") {
                 $content = null;
                 if (isset($declaration->id)) {
                     $content .= route('declarations.show', $declaration->id);
@@ -185,9 +184,9 @@ class DeclarationController extends ModularController
                 ->queue(new EmailToPassenger($declaration));
         }
 
-        // $this->success('Verify your email and log in.');
+// $this->success('Verify your email and log in.');
 
-        // $this->success('Declaration has been created');
+// $this->success('Declaration has been created');
 
         return $this->redirect(route('healthDeclaration-post', $declaration));
     }
@@ -196,8 +195,10 @@ class DeclarationController extends ModularController
      * @param $declaration
      * @return \Illuminate\Contracts\View\View
      */
-    public function healthDeclarationPost($declaration)
-    {
+    public
+    function healthDeclarationPost(
+        $declaration
+    ) {
         $declaration = Declaration::findorFail($declaration);
 
         return View::make('projects.health-declaration.modules.declarations.public.postDeclaration', compact(['declaration', $declaration]));
@@ -207,8 +208,10 @@ class DeclarationController extends ModularController
      * @param $declaration
      * @return \Illuminate\Contracts\View\View
      */
-    public function healthDeclarationPrint($declaration)
-    {
+    public
+    function healthDeclarationPrint(
+        $declaration
+    ) {
         $declaration = Declaration::findorFail($declaration);
 
         $content = null;
@@ -220,8 +223,10 @@ class DeclarationController extends ModularController
         return View::make('projects.health-declaration.modules.declarations.public.declaration-print', compact(['declaration', 'content']));
     }
 
-    public function downloadPdf($declaration)
-    {
+    public
+    function downloadPdf(
+        $declaration
+    ) {
         // Resolve file name and blade view
         $declaration = Declaration::find($declaration);
         $content = null;
@@ -237,17 +242,18 @@ class DeclarationController extends ModularController
 
         return $pdf->download($fileName);
     }
-    // public function report() { }
-    // public function storeRequestValidator() { }
-    // public function updateRequestValidator() { }
-    // public function saveRequestValidator() { }
-    // public function attemptStore() { }
-    // public function attemptUpdate() { }
-    // public function attemptDestroy() { }
-    // public function stored() { }
-    // public function updated() { }
-    // public function saved() { }
-    // public function deleted() { }
+
+// public function report() { }
+// public function storeRequestValidator() { }
+// public function updateRequestValidator() { }
+// public function saveRequestValidator() { }
+// public function attemptStore() { }
+// public function attemptUpdate() { }
+// public function attemptDestroy() { }
+// public function stored() { }
+// public function updated() { }
+// public function saved() { }
+// public function deleted() { }
 
     /*
     |--------------------------------------------------------------------------
