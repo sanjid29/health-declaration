@@ -81,7 +81,7 @@ class DeclarationController extends ModularController
             'passenger_name' => 'required',
             'mobile_no' => 'required|numeric',
             'passport_no' => 'required',
-            'email' => 'email:rfc,dns,filter,strict',
+            'email' => 'nullable|email:rfc,dns,filter,strict',
             'passenger_dob' => 'required',
             'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
             'gender' => 'required',
