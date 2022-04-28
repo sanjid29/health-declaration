@@ -112,7 +112,7 @@
 
         {{ Form::close() }}
 
-        <h5> If you face any difficulty filling up the form, please call 01769954137 /ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে ০১৭৬৯৯৫৪১৩৭
+        <h5> If you face any difficulty filling up the form, please call 01313791222,01322858249 /ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 01313791222,01322858249
             নাম্বারে ফোন করুন।</h5>
 
     </div>
