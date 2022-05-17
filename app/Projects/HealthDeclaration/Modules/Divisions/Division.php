@@ -95,7 +95,18 @@ class Division extends BaseModule
     |--------------------------------------------------------------------------
     */
     // public function updater() { return $this->belongsTo(\App\User::class, 'updated_by'); }
+    public function districts()
+    {
+        return $this->hasMany(\App\District::class);
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function upazilas()
+    {
+        return $this->hasMany(\App\Upazila::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | Section: Helpers

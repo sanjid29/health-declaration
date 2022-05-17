@@ -47,6 +47,8 @@ class DistrictProcessor extends ModelProcessor
     {
         $rules = [
             // 'name' => 'required|between:1,100|'.'unique:districts,name,'.($element->id ?? 'null').',id,deleted_at,NULL',
+            'division_id' => 'required',
+            'name' => 'required',
             'is_active' => 'in:1,0',
         ];
 
@@ -75,10 +77,10 @@ class DistrictProcessor extends ModelProcessor
 
         // Todo: Then do further processing
         // ----------------------------------
-        // if($this->isValid()){
-        //     $element->fillSomeData();
-        //
-        // }
+        if ($this->isValid()) {
+            $this->denormalize();
+
+        }
 
         return $this;
     }
@@ -113,7 +115,16 @@ class DistrictProcessor extends ModelProcessor
     |--------------------------------------------------------------------------
     */
     // Todo: Other helper functions
+    function denormalize()
+    {
+        $element = $this->element;
+        $division = $element->division;
+        $element->division_code = $division->code;
+        $element->division_name = $division->name;
 
+
+        $element->combinedcode = $division->combinedcode.$element->code;
+    }
     /*
     |--------------------------------------------------------------------------
     | Validation helper functions

@@ -61,7 +61,7 @@ if (!isset($var['labelIdentifier'])) {
             let division = $('select[name={{$prefix}}division_id]');
             var parentSelect = $('select[name={{$prefix}}district_id]');
             var childSelect = $("select[name={{$prefix}}upazila_id]");
-            var url = '{{route('upazilas.list-json',['is_active'=>'1','force_all_data'=>'yes'])}}';
+            var url = '{{route('upazilas.list-json',['is_active'=>'1'])}}';
             division.select2();
             parentSelect.select2();
             childSelect.select2();
@@ -77,9 +77,11 @@ if (!isset($var['labelIdentifier'])) {
                 axios.get(url, {
                     params: {
                         division_id: division.select2('val'),
-                        district_id: $(this).select2('val')
+                        district_id: $(this).select2('val'),
+                        force_all_data:'yes'
                     }
                 }).then((response) => {
+                    console.log(response);
                     $(childSelect).append("<option value=0>" + "-" + "</option>"); // Add empty selection
                     $.each(response.data.data.items, function (i, obj) { // Load options
                         $(childSelect).append("<option value=" + obj.id + ">" + obj.name + "</option>");

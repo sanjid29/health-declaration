@@ -101,7 +101,15 @@ class Upazila extends BaseModule
     |--------------------------------------------------------------------------
     */
     // public function updater() { return $this->belongsTo(\App\User::class, 'updated_by'); }
+    public function division()
+    {
+        return $this->belongsTo(\App\Division::class);
+    }
 
+    public function district()
+    {
+        return $this->belongsTo(\App\District::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | Section: Helpers

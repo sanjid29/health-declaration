@@ -27,8 +27,8 @@ class District extends BaseModule
         'longitude',
         'code',
         'division_id',
-        'division_code',
-        'division_name',
+        //'division_code',
+        //'division_name',
         'is_active',
     ];
 
@@ -98,7 +98,14 @@ class District extends BaseModule
     |--------------------------------------------------------------------------
     */
     // public function updater() { return $this->belongsTo(\App\User::class, 'updated_by'); }
-
+    public function division()
+    {
+        return $this->belongsTo(\App\Division::class);
+    }
+    public function upazilas()
+    {
+        return $this->hasMany(\App\Upazila::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | Section: Helpers

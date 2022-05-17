@@ -47,6 +47,9 @@ class UpazilaProcessor extends ModelProcessor
     {
         $rules = [
             // 'name' => 'required|between:1,100|'.'unique:upazilas,name,'.($element->id ?? 'null').',id,deleted_at,NULL',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'code' => 'required',
             'is_active' => 'in:1,0',
         ];
 
@@ -75,10 +78,10 @@ class UpazilaProcessor extends ModelProcessor
 
         // Todo: Then do further processing
         // ----------------------------------
-        // if($this->isValid()){
-        //     $element->fillSomeData();
-        //
-        // }
+        if ($this->isValid()) {
+            $this->denormalize();
+
+        }
 
         return $this;
     }
@@ -119,7 +122,19 @@ class UpazilaProcessor extends ModelProcessor
     | Validation helper functions
     |--------------------------------------------------------------------------
     */
+    function denormalize()
+    {
+        $element = $this->element;
+        $division = $element->division;
+        $element->division_code = $division->code;
+        $element->division_name = $division->name;
 
+        $district = $element->district;
+
+        $element->district_code = $district->code;
+        $element->district_name = $district->name;
+        $element->combinedcode = $district->combinedcode.$element->code;
+    }
     // Todo: Functions for validation
 
 }
