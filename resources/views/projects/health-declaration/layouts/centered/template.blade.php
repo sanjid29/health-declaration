@@ -18,7 +18,25 @@
 <body class="hold-transition login-page lb-bg">
 <div class="login-box shadow">
     <div class="login-logo">
+        <table class="table-condensed" width="100%">
+            <tr>
+                <td align="right" style="vertical-align: center">
+                    <img src="{{asset('projects/health-declaration/logo/GoB.png')}}" width="70px"/>
+                </td>
+
+                <td align="left" style="vertical-align: center">
+                    <img src="{{asset('projects/health-declaration/logo/dghs.jpg')}}" width="70px"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="vertical-align: middle" colspan="2">
+                    <h3>Government of the People's Republic of Bangladesh</h3>
+                    <h3>Ministry of Health & Family Welfare</h3>
+                </td>
+            </tr>
+        </table>
         {{config('app.name')}}
+
     </div>
     <div class="login-box-body">
         @include('projects.health-declaration.layouts.default.includes.alerts.messages-top')
@@ -43,9 +61,9 @@
 <script>
     $(function () {
         $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
+            // checkboxClass: 'icheckbox_square-blue',
+            // radioClass: 'iradio_square-blue',
+            // increaseArea: '20%' // optional
         });
     });
 </script>
