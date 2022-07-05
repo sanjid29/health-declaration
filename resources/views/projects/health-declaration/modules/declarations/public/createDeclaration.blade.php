@@ -53,7 +53,7 @@
 
         </div>
 
-         <div class="clearfix"></div>
+        <div class="clearfix"></div>
         <h4>Where are you staying in Bangladesh?/বাংলাদেশে অবস্থানকালীন ঠিকানা</h4>
         @include('form.select-array',['var'=>['name'=>'address_type','label'=>'(Rural Area/গ্রাম) / (Town/শহর) *', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])
         <div class="clearfix"></div>
@@ -214,6 +214,11 @@
         }
 
         $('select[name=journey_from_country_id]').on('change', function () {
+            $('#showRt-PCR,#covidSymptoms,#departureDate').show();
+            $('input[name=nationality],select[name=mode_of_transport],select[name=is_rt_pcr_negative],select[name=have_covid_symptoms]').val(null);
+          
+            $('select[name=country_code_mobile_number]').select2("val", null);
+            $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
             if ($(this).val() == 186) {
                 $('input[name=nationality]').val('Bangladeshi');
                 $('select[name=country_code_mobile_number]').select2("val", "880");
@@ -222,8 +227,8 @@
                 $('select[name=have_covid_symptoms]').val(0);
                 $('#showRt-PCR,#covidSymptoms,#departureDate').hide();
                 $("#healthDeclaration-form input[name=email]").removeClass('validate[email]');
-
             }
+
         }).trigger('change')
 
     </script>
