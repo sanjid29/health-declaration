@@ -10,19 +10,22 @@
 
     <h4>
         All information shall be kept confidential and will be used for Public Health purposes. The Ministry of Health & Family Welfare, Government of the
-        People’s Republic of Bangladesh mandatorily requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
+        People’s Republic of Bangladesh mandatory requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
         form as a part of health screening at the port of entry.
     </h4>
     <h4>
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
     </h4>
-    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled within 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টার মধ্যে ফর্মটি
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Form should be filled within 72 hours prior to Departure time/ যাত্রা সময়ের 72 ঘন্টার
+        মধ্যে ফর্মটি
         পূরণ করতে হবে </h5>
     <h5 style="color:green !important;padding: 5px; font-weight: 600;">Not Applicable for kids of twelve or less years old/ বারো বা তার কম বয়সী বাচ্চাদের জন্য
         প্রযোজ্য নয় </h5>
-    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Except for Janssen (Jhonson & Jhonson), other vaccines must have two doses to be considered completed / Janssen (Jhonson & Jhonson) ব্যতীত, অন্যান্য টিকা সম্পূর্ণ বলে বিবেচনা করার জন্য দুটি ডোজ থাকতে হবে </h5>
-    <h5 style="color:green !important;padding: 5px; font-weight: 600;"> If Vaccine is not completed, RT-PCR negative form must be filled / ভ্যাকসিন সম্পূর্ণ না হলে, RT-PCR নেগেটিভ ফর্ম অবশ্যই পূরণ করতে হবে </h5>
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;">Except for Janssen (Johnson & Johnson), other vaccines must have two doses to be
+        considered completed / Janssen (Johnson & Johnson) ব্যতীত, অন্যান্য টিকা সম্পূর্ণ বলে বিবেচনা করার জন্য দুটি ডোজ থাকতে হবে </h5>
+    <h5 style="color:green !important;padding: 5px; font-weight: 600;"> If Vaccine is not completed, RT-PCR negative form must be filled / ভ্যাকসিন সম্পূর্ণ না
+        হলে, RT-PCR নেগেটিভ ফর্ম অবশ্যই পূরণ করতে হবে </h5>
     <div class="card-body">
 
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
@@ -44,10 +47,13 @@
         @include('form.select-model',['var'=>['name'=>'journey_from_country_id','label'=>'Country of Origin of Travel/যে দেশ থেকে যাত্রা শুরু করেছেন','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
         @include('form.date',['var'=>['name'=>'arrival_date','label'=>'Date of Arrival/আগমনের তারিখ', 'div'=>'col-sm-4','class'=>'readonly','placeholder'=>'dd-mm-yyyy']])
-        @include('form.datetime',['var'=>['name'=>'start_date','label'=>'Departure Date from Country of Origin of Travel/যাত্রা শুরু তারিখ*', 'div'=>'col-sm-6','class'=>'readonly','placeholder'=>'dd-mm-yyyy h:m:s']])
+        <div id="departureDate">
+            @include('form.datetime',['var'=>['name'=>'start_date','label'=>'Departure Date from Country of Origin of Travel/যাত্রা শুরু তারিখ*', 'div'=>'col-sm-6','class'=>'readonly','placeholder'=>'dd-mm-yyyy h:m:s']])
+            @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited within last two (02) weeks (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
 
-        @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited within last two (02) weeks (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
-        <div class="clearfix"></div>
+        </div>
+
+         <div class="clearfix"></div>
         <h4>Where are you staying in Bangladesh?/বাংলাদেশে অবস্থানকালীন ঠিকানা</h4>
         @include('form.select-array',['var'=>['name'=>'address_type','label'=>'(Rural Area/গ্রাম) / (Town/শহর) *', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])
         <div class="clearfix"></div>
@@ -69,7 +75,9 @@
 
         <div class="clearfix"></div>
         <h4>Symptoms</h4>
-        @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে? *', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
+        <div id="covidSymptoms">
+            @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে? *', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
+        </div>
         <div class="clearfix"></div>
         <h4>Covid 19 Information</h4>
         <div class="clearfix"></div>
@@ -91,7 +99,7 @@
             <div class="clearfix"></div>
             @include('form.select-array',['var'=>['name'=>'is_rt_pcr_negative','label'=>'Do you have Covid19 rt-PCR negative report within 72 hours of Travel? /আপনার কি ৭২ ঘন্টা মেয়াদী কোভিড-১৯ আরটিপিসিআর নেগেটিভ সনদ রয়েছে? *', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
             <div class="clearfix"></div>
-            <h6>If Yes, show rt-PCR test result and submit one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+            <h6 id="showRt-PCR">If Yes, show rt-PCR test result and submit one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
         </div>
 
         <div class="clearfix"></div>
@@ -112,7 +120,8 @@
 
         {{ Form::close() }}
 
-        <h5> If you face any difficulty filling up the form, please call 01313791222,01322858249 /ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 01313791222,01322858249
+        <h5> If you face any difficulty filling up the form, please call 01313791222,01322858249 /ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে
+            01313791222,01322858249
             নাম্বারে ফোন করুন।</h5>
 
     </div>
@@ -143,9 +152,7 @@
         $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
         $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
         $("#healthDeclaration-form select[name=gender]").addClass('validate[required]');
-        //$("#healthDeclaration-form input[name=passenger_dob]").addClass('validate[required]');
         $("#healthDeclaration-form input[id=local_contact_no]").addClass('validate[required]');
-        //$("#healthDeclaration-form input[name=start_date]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=mode_of_transport]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=journey_from_country_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
@@ -205,6 +212,19 @@
                 $('#label_upazila_id').html('Upazila/Thana/উপজেলা *')
             }
         }
+
+        $('select[name=journey_from_country_id]').on('change', function () {
+            if ($(this).val() == 186) {
+                $('input[name=nationality]').val('Bangladeshi');
+                $('select[name=country_code_mobile_number]').select2("val", "880");
+                $('select[name=mode_of_transport]').val('air');
+                $('select[name=is_rt_pcr_negative]').val(1);
+                $('select[name=have_covid_symptoms]').val(0);
+                $('#showRt-PCR,#covidSymptoms,#departureDate').hide();
+                $("#healthDeclaration-form input[name=email]").removeClass('validate[email]');
+
+            }
+        }).trigger('change')
 
     </script>
 @endsection

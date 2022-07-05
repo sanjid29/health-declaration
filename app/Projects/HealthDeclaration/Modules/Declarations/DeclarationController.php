@@ -47,7 +47,7 @@ class DeclarationController extends ModularController
      *
      * @return DeclarationDatatable
      */
-    public function datatable()
+    public function datatable(): DeclarationDatatable
     {
         return new DeclarationDatatable($this->module);
     }
@@ -58,12 +58,12 @@ class DeclarationController extends ModularController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function listJson()
+    public function listJson(): \Illuminate\Http\JsonResponse
     {
         return (new ModuleList($this->module))->json();
     }
 
-    public function createHealthDeclaration()
+    public function createHealthDeclaration(): \Illuminate\Contracts\View\View
     {
         return View::make('projects.health-declaration.modules.declarations.public.createDeclaration');
     }
@@ -71,19 +71,22 @@ class DeclarationController extends ModularController
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function healthDeclarationStore()
+    public function healthDeclarationStore(): \Illuminate\Http\RedirectResponse
     {
 
         $threeDaysBefore = Carbon::now()->subDays(3);
         $threeDaysAfter = Carbon::now()->addDays(3);
-
-        $validator = Validator::make(request()->all(), [
+        $countryFrom=null;
+        $rules=[
             'passenger_name' => 'required',
             'mobile_no' => 'required|numeric',
+
             'passport_no' => 'required',
             'email' => 'nullable|email:rfc,dns,filter,strict',
+
             'passenger_dob' => 'required',
             'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
+
             'gender' => 'required',
             'country_code_mobile_number' => 'required',
             'mode_of_transport' => 'required',
@@ -104,7 +107,45 @@ class DeclarationController extends ModularController
             'primary_vaccine_id' => 'required_if:is_vaccinated,1',
             'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
             'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
-        ]);
+        ];
+        if(request()->has('journey_from_country_id')){
+            $countryFrom=request()->get('journey_from_country_id');
+        }
+        if($countryFrom=='186')
+        {
+            $rules=[
+                'passenger_name' => 'required',
+                'mobile_no' => 'required|numeric',
+
+                'passport_no' => 'required',
+                'email' => 'nullable|email:rfc,dns,filter,strict',
+
+                'passenger_dob' => 'required',
+                //'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
+
+                'gender' => 'required',
+                //'country_code_mobile_number' => 'required',
+                //'mode_of_transport' => 'required',
+
+                'address_type' => 'required',
+                'district_id' => 'required',
+                'division_id' => 'required',
+                'local_contact_no' => 'required',
+
+                'village' => 'required_if:address_type,rural',
+                'upazila_id' => 'required_if:address_type,town',
+                'city_corporation' => 'required_if:address_type,town',
+
+
+
+                //'have_covid_symptoms' => 'required',
+                'is_vaccinated' => 'required',
+                'primary_vaccine_id' => 'required_if:is_vaccinated,1',
+                //'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
+                'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
+            ];
+        }
+        $validator = Validator::make(request()->all(),$rules );
 
         if ($validator->fails()) {
             $this->setValidator($validator);
@@ -195,8 +236,7 @@ class DeclarationController extends ModularController
      * @param $declaration
      * @return \Illuminate\Contracts\View\View
      */
-    public
-    function healthDeclarationPost(
+    public function healthDeclarationPost(
         $declaration
     ) {
         $declaration = Declaration::findorFail($declaration);
@@ -208,10 +248,7 @@ class DeclarationController extends ModularController
      * @param $declaration
      * @return \Illuminate\Contracts\View\View
      */
-    public
-    function healthDeclarationPrint(
-        $declaration
-    ) {
+    public function healthDeclarationPrint($declaration) {
         $declaration = Declaration::findorFail($declaration);
 
         $content = null;
@@ -223,10 +260,7 @@ class DeclarationController extends ModularController
         return View::make('projects.health-declaration.modules.declarations.public.declaration-print', compact(['declaration', 'content']));
     }
 
-    public
-    function downloadPdf(
-        $declaration
-    ) {
+    public function downloadPdf($declaration) {
         // Resolve file name and blade view
         $declaration = Declaration::find($declaration);
         $content = null;
