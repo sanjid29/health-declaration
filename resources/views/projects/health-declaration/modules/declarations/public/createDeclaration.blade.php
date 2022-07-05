@@ -216,7 +216,7 @@
         $('select[name=journey_from_country_id]').on('change', function () {
             $('#showRt-PCR,#covidSymptoms,#departureDate').show();
             $('input[name=nationality],select[name=mode_of_transport],select[name=is_rt_pcr_negative],select[name=have_covid_symptoms]').val(null);
-          
+
             $('select[name=country_code_mobile_number]').select2("val", null);
             $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
             if ($(this).val() == 186) {
