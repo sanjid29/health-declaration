@@ -17,8 +17,10 @@ if (!isset($var['labelIdentifier'])) {
 @include('form.select-model',['var'=>['name'=>$prefix.'division_id','label'=>$label.'Division/বিভাগ *', 'name_field'=>'name', 'model'=>\App\Division::class,'class'=>'select2','container_class'=>'col-md-4']])
 
 @include('form.select-model',['var'=>['name'=>$prefix.'district_id','label'=>$label.'District/জেলা *', 'name_field'=>'name', 'model'=>\App\District::class,'class'=>'select2','container_class'=>'col-md-4']])
+<div id="upazila-div">
+    @include('form.select-model',['var'=>['name'=>$prefix.'upazila_id','label'=>$label.'Upazila/Thana/উপজেলা', 'name_field'=>'name', 'model'=>\App\Upazila::class,'class'=>'select2','container_class'=>'col-md-4']])
 
-@include('form.select-model',['var'=>['name'=>$prefix.'upazila_id','label'=>$label.'Upazila/Thana/উপজেলা', 'name_field'=>'name', 'model'=>\App\Upazila::class,'class'=>'select2','container_class'=>'col-md-4']])
+</div>
 @section('js')
     @parent
     <script type="text/javascript">

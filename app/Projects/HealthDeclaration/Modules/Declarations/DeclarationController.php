@@ -130,19 +130,19 @@ class DeclarationController extends ModularController
                 'address_type' => 'required',
                 'district_id' => 'required',
                 'division_id' => 'required',
-                'local_contact_no' => 'required',
+                //'local_contact_no' => 'required',
 
-                'village' => 'required_if:address_type,rural',
-                'upazila_id' => 'required_if:address_type,town',
-                'city_corporation' => 'required_if:address_type,town',
+                //'village' => 'required_if:address_type,rural',
+                //'upazila_id' => 'required_if:address_type,town',
+                //'city_corporation' => 'required_if:address_type,town',
 
 
 
                 //'have_covid_symptoms' => 'required',
-                'is_vaccinated' => 'required',
-                'primary_vaccine_id' => 'required_if:is_vaccinated,1',
+                //'is_vaccinated' => 'required',
+                //'primary_vaccine_id' => 'required_if:is_vaccinated,1',
                 //'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
-                'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
+                //'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
             ];
         }
         $validator = Validator::make(request()->all(),$rules );
