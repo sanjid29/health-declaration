@@ -111,40 +111,40 @@ class DeclarationController extends ModularController
         if(request()->has('journey_from_country_id')){
             $countryFrom=request()->get('journey_from_country_id');
         }
-        if($countryFrom=='186')
-        {
-            $rules=[
-                'passenger_name' => 'required',
-                'mobile_no' => 'required|numeric',
-
-                'passport_no' => 'required',
-                'email' => 'nullable|email:rfc,dns,filter,strict',
-
-                'passenger_dob' => 'required',
-                //'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
-
-                'gender' => 'required',
-                //'country_code_mobile_number' => 'required',
-                //'mode_of_transport' => 'required',
-
-                'address_type' => 'required',
-                'district_id' => 'required',
-                'division_id' => 'required',
-                //'local_contact_no' => 'required',
-
-                //'village' => 'required_if:address_type,rural',
-                //'upazila_id' => 'required_if:address_type,town',
-                //'city_corporation' => 'required_if:address_type,town',
-
-
-
-                //'have_covid_symptoms' => 'required',
-                //'is_vaccinated' => 'required',
-                //'primary_vaccine_id' => 'required_if:is_vaccinated,1',
-                //'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
-                //'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
-            ];
-        }
+        // if($countryFrom=='186')
+        // {
+        //     $rules=[
+        //         'passenger_name' => 'required',
+        //         'mobile_no' => 'required|numeric',
+        //
+        //         'passport_no' => 'required',
+        //         'email' => 'nullable|email:rfc,dns,filter,strict',
+        //
+        //         'passenger_dob' => 'required',
+        //         //'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
+        //
+        //         'gender' => 'required',
+        //         //'country_code_mobile_number' => 'required',
+        //         //'mode_of_transport' => 'required',
+        //
+        //         'address_type' => 'required',
+        //         'district_id' => 'required',
+        //         'division_id' => 'required',
+        //         //'local_contact_no' => 'required',
+        //
+        //         //'village' => 'required_if:address_type,rural',
+        //         //'upazila_id' => 'required_if:address_type,town',
+        //         //'city_corporation' => 'required_if:address_type,town',
+        //
+        //
+        //
+        //         //'have_covid_symptoms' => 'required',
+        //         //'is_vaccinated' => 'required',
+        //         //'primary_vaccine_id' => 'required_if:is_vaccinated,1',
+        //         //'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
+        //         //'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
+        //     ];
+        // }
         $validator = Validator::make(request()->all(),$rules );
 
         if ($validator->fails()) {
@@ -225,56 +225,64 @@ class DeclarationController extends ModularController
                 ->queue(new EmailToPassenger($declaration));
         }
 
-// $this->success('Verify your email and log in.');
 
-// $this->success('Declaration has been created');
 
-        return $this->redirect(route('healthDeclaration-post', $declaration));
+        return $this->redirect(route('healthDeclaration-post', $declaration->uuid));
     }
 
     /**
      * @param $declaration
      * @return \Illuminate\Contracts\View\View
      */
-    public function healthDeclarationPost(
-        $declaration
-    ) {
-        $declaration = Declaration::findorFail($declaration);
+    public function healthDeclarationPost($uuid): \Illuminate\Contracts\View\View
+    {
+        $declaration = Declaration::where('uuid',$uuid)->first();
+        if($declaration){
+            return View::make('projects.health-declaration.modules.declarations.public.postDeclaration', compact(['declaration', $declaration]));
 
-        return View::make('projects.health-declaration.modules.declarations.public.postDeclaration', compact(['declaration', $declaration]));
-    }
-
-    /**
-     * @param $declaration
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function healthDeclarationPrint($declaration) {
-        $declaration = Declaration::findorFail($declaration);
-
-        $content = null;
-
-        if (isset($declaration->id)) {
-            $content .= route('declarations.show', $declaration->id);
         }
+        abort(404);
 
-        return View::make('projects.health-declaration.modules.declarations.public.declaration-print', compact(['declaration', 'content']));
     }
 
-    public function downloadPdf($declaration) {
+    /**
+     * @param $declaration
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function healthDeclarationPrint($uuid): \Illuminate\Contracts\View\View
+    {
+        $declaration = Declaration::where('uuid',$uuid)->first();
+        if($declaration){
+            $content = null;
+
+            if (isset($declaration->id)) {
+                $content .= route('declarations.show', $declaration->id);
+            }
+
+            return View::make('projects.health-declaration.modules.declarations.public.declaration-print', compact(['declaration', 'content']));
+
+        }
+        abort(404);
+   }
+
+    public function downloadPdf($uuid) {
         // Resolve file name and blade view
-        $declaration = Declaration::find($declaration);
-        $content = null;
-        if (isset($declaration->id)) {
-            $content .= route('declarations.show', $declaration->id);
-        }
-        $fileName = "Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
-        $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
-        $pdf = PDF::loadView($view, [
-            'declaration' => $declaration,
-            'content' => $content,
-        ]);
+        $declaration = Declaration::where('uuid',$uuid)->first();
+        if($declaration){
+            $content = null;
+            if (isset($declaration->id)) {
+                $content .= route('declarations.show', $declaration->id);
+            }
+            $fileName = "Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
+            $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
+            $pdf = PDF::loadView($view, [
+                'declaration' => $declaration,
+                'content' => $content,
+            ]);
 
-        return $pdf->download($fileName);
+            return $pdf->download($fileName);
+        }
+        abort(404);
     }
 
 // public function report() { }

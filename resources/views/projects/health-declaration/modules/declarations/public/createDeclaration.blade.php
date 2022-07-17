@@ -237,29 +237,29 @@
             }
         }
 
-        $('select[name=journey_from_country_id]').on('change', function () {
-            $('#covid-symptoms,#departure-date,#email,#address-detailed,#vaccine-info,#rt-pcr-field,#upazila-div').show();
-            $('input[name=nationality],select[name=mode_of_transport],select[name=is_rt_pcr_negative],select[name=have_covid_symptoms]').val(null);
-            $("#healthDeclaration-form input[id=local_contact_no]").addClass('validate[required]');
-            $('select[name=country_code_mobile_number]').select2("val", null);
-            $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
-            $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
-            $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
-            if ($(this).val() == 186) {
-                $('input[name=nationality]').val('Bangladeshi');
-                $('select[name=country_code_mobile_number]').select2("val", "880");
-                $('select[name=mode_of_transport]').val('air');
-                $('select[name=is_rt_pcr_negative]').val(1);
-                $('select[name=have_covid_symptoms]').val(0);
-                $('select[name=is_vaccinated]').val(0);
-                $('#covid-symptoms,#departure-date,#email,#address-detailed,#vaccine-info,#rt-pcr-field,#upazila-div').hide();
-                $("#healthDeclaration-form input[name=email]").removeClass('validate[email]');
-                $("#healthDeclaration-form input[id=local_contact_no]").removeClass('validate[required]');
-                $("#healthDeclaration-form select[id=have_covid_symptoms]").removeClass('validate[required]');
-                $("#healthDeclaration-form select[id=is_vaccinated]").removeClass('validate[required]');
-            }
-
-        }).trigger('change')
+        // $('select[name=journey_from_country_id]').on('change', function () {
+        //     $('#covid-symptoms,#departure-date,#email,#address-detailed,#vaccine-info,#rt-pcr-field,#upazila-div').show();
+        //     $('input[name=nationality],select[name=mode_of_transport],select[name=is_rt_pcr_negative],select[name=have_covid_symptoms]').val(null);
+        //     $("#healthDeclaration-form input[id=local_contact_no]").addClass('validate[required]');
+        //     $('select[name=country_code_mobile_number]').select2("val", null);
+        //     $("#healthDeclaration-form input[name=email]").addClass('validate[email]');
+        //     $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
+        //     $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
+        //     if ($(this).val() == 186) {
+        //         $('input[name=nationality]').val('Bangladeshi');
+        //         $('select[name=country_code_mobile_number]').select2("val", "880");
+        //         $('select[name=mode_of_transport]').val('air');
+        //         $('select[name=is_rt_pcr_negative]').val(1);
+        //         $('select[name=have_covid_symptoms]').val(0);
+        //         $('select[name=is_vaccinated]').val(0);
+        //         $('#covid-symptoms,#departure-date,#email,#address-detailed,#vaccine-info,#rt-pcr-field,#upazila-div').hide();
+        //         $("#healthDeclaration-form input[name=email]").removeClass('validate[email]');
+        //         $("#healthDeclaration-form input[id=local_contact_no]").removeClass('validate[required]');
+        //         $("#healthDeclaration-form select[id=have_covid_symptoms]").removeClass('validate[required]');
+        //         $("#healthDeclaration-form select[id=is_vaccinated]").removeClass('validate[required]');
+        //     }
+        //
+        // }).trigger('change')
 
     </script>
 @endsection

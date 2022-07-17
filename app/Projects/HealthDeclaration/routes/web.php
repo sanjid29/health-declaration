@@ -78,9 +78,9 @@ Route::middleware($middlewares)->group(function () use ($modules, $moduleGroups)
 Route::get('/', [DeclarationController::class,'createHealthDeclaration'])->name('declaration-form');
 Route::get('/createHealthDeclaration',[DeclarationController::class,'createHealthDeclaration'])->name('healthDeclaration-create');
 Route::post('/createHealthDeclaration',[DeclarationController::class,'healthDeclarationStore'])->name('healthDeclaration-store');
-Route::get('/postHealthDeclaration/{declaration}',[DeclarationController::class,'healthDeclarationPost'])->name('healthDeclaration-post');
-Route::get('/printHealthDeclaration/{declaration}',[DeclarationController::class,'healthDeclarationPrint'])->name('healthDeclaration-print');
-Route::get('/downloadHealthDeclaration/{declaration}',[DeclarationController::class,'downloadPdf'])->name('healthDeclaration-pdf');
+Route::get('/postHealthDeclaration/{uuid}',[DeclarationController::class,'healthDeclarationPost'])->name('healthDeclaration-post');
+Route::get('/printHealthDeclaration/{uuid}',[DeclarationController::class,'healthDeclarationPrint'])->name('healthDeclaration-print');
+Route::get('/downloadHealthDeclaration/{uuid}',[DeclarationController::class,'downloadPdf'])->name('healthDeclaration-pdf');
 Route::get('/divisions/list/json', [DivisionController::class,'listJson'])->name('divisions.list-json'); // List/Array of objects
 Route::get('/districts/list/json', [DistrictController::class,'listJson'])->name('districts.list-json'); // List/Array of objects
 Route::get('/upazilas/list/json', [UpazilaController::class,'listJson'])->name('upazilas.list-json'); // List/Array of objects
