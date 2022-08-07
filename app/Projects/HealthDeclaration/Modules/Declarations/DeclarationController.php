@@ -191,18 +191,16 @@ class DeclarationController extends ModularController
             }
         }
 
-        // if ($vaccineComplete) {
-        //     $decision = "You are Allowed to Travel";
-        //     $reason = "The user has completed Vaccination.";
-        // } elseif ($hasRtPCRNegative) {
-        //     $decision = "You are Allowed to Travel";
-        //     $reason = "The user has completed Vaccination.";
-        // } else {
-        //     $reason = "The user has not taken Vaccination and he/she has taken RT-PCR and was positive in the last 72 hours.";
-        //     $decision = "You are Not Allowed to Travel";
-        // }
-        $decision = "You are Allowed to Travel";
-        $reason = "The user has completed Vaccination.";
+        if ($vaccineComplete) {
+            $decision = "You are Allowed to Travel";
+            $reason = "The user has completed Vaccination.";
+        } elseif ($hasRtPCRNegative) {
+            $decision = "You are Allowed to Travel";
+            $reason = "The user has completed Vaccination.";
+        } else {
+            $reason = "The user has not taken Vaccination and he/she has taken RT-PCR and was positive in the last 72 hours.";
+            $decision = "You are Not Allowed to Travel";
+        }
         request()->merge(['decision' => $decision, 'remark' => $reason]);
 
         //Create user
