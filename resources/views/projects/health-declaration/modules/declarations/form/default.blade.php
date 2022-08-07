@@ -17,8 +17,8 @@ $declaration = $element;
 ?>
 @section('content-top')
 
-    <a class="btn btn-primary" href="{{route('healthDeclaration-print',$declaration->id)}}" target="_blank" style="color:white">View PDF</a>
-    <a class="btn btn-primary" href="{{route('healthDeclaration-pdf',$declaration->id)}}" target="_blank" style="color:white">Download Form</a>
+    <a class="btn btn-primary" href="{{route('healthDeclaration-print',$declaration->uuid)}}" target="_blank" style="color:white">View PDF</a>
+    <a class="btn btn-primary" href="{{route('healthDeclaration-pdf',$declaration->uuid)}}" target="_blank" style="color:white">Download Form</a>
 
 @endsection
 
