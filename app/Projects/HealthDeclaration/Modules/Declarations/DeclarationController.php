@@ -76,76 +76,30 @@ class DeclarationController extends ModularController
 
         $threeDaysBefore = Carbon::now()->subDays(3);
         $threeDaysAfter = Carbon::now()->addDays(3);
-        $countryFrom=null;
-        $rules=[
+        $countryFrom = null;
+        $rules = [
             'passenger_name' => 'required',
             'mobile_no' => 'required|numeric',
-
             'passport_no' => 'required',
-            'email' => 'nullable|email:rfc,dns,filter,strict',
+            //'email' => 'nullable|email:rfc,dns,filter,strict',
 
-            'passenger_dob' => 'required',
+            'age_in_years' => 'required',
             'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
 
             'gender' => 'required',
             'country_code_mobile_number' => 'required',
             'mode_of_transport' => 'required',
 
-            'address_type' => 'required',
-            'district_id' => 'required',
             'division_id' => 'required',
+            'district_id' => 'required',
             'local_contact_no' => 'required',
-
-            'village' => 'required_if:address_type,rural',
-            'upazila_id' => 'required_if:address_type,town',
-            'city_corporation' => 'required_if:address_type,town',
-
-
 
             'have_covid_symptoms' => 'required',
             'is_vaccinated' => 'required',
-            'primary_vaccine_id' => 'required_if:is_vaccinated,1',
             'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
-            'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
         ];
-        if(request()->has('journey_from_country_id')){
-            $countryFrom=request()->get('journey_from_country_id');
-        }
-        // if($countryFrom=='186')
-        // {
-        //     $rules=[
-        //         'passenger_name' => 'required',
-        //         'mobile_no' => 'required|numeric',
-        //
-        //         'passport_no' => 'required',
-        //         'email' => 'nullable|email:rfc,dns,filter,strict',
-        //
-        //         'passenger_dob' => 'required',
-        //         //'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
-        //
-        //         'gender' => 'required',
-        //         //'country_code_mobile_number' => 'required',
-        //         //'mode_of_transport' => 'required',
-        //
-        //         'address_type' => 'required',
-        //         'district_id' => 'required',
-        //         'division_id' => 'required',
-        //         //'local_contact_no' => 'required',
-        //
-        //         //'village' => 'required_if:address_type,rural',
-        //         //'upazila_id' => 'required_if:address_type,town',
-        //         //'city_corporation' => 'required_if:address_type,town',
-        //
-        //
-        //
-        //         //'have_covid_symptoms' => 'required',
-        //         //'is_vaccinated' => 'required',
-        //         //'primary_vaccine_id' => 'required_if:is_vaccinated,1',
-        //         //'is_rt_pcr_negative' => 'required_if:is_vaccinated,0',
-        //         //'first_vaccine_date' => 'required_unless:primary_vaccine_id,null',
-        //     ];
-        // }
-        $validator = Validator::make(request()->all(),$rules );
+
+        $validator = Validator::make(request()->all(), $rules);
 
         if ($validator->fails()) {
             $this->setValidator($validator);
@@ -172,23 +126,27 @@ class DeclarationController extends ModularController
         $hasRtPCRNegative = request()->get('is_rt_pcr_negative');
         $decision = $reason = $dateToCompare = null;
         $vaccineComplete = false;
-        if ($isVaccinated) {
-            if (request()->get('primary_vaccine_id') == '7') {
-                $dateToCompare = request()->get('first_vaccine_date');
-            } else {
-                $dateToCompare = request()->get('second_vaccine_date');
-            }
-            if ($dateToCompare) {
-                $fourteenDaysFlag = false;
-                if (Time::differenceInDays($dateToCompare, now()) > 14) {
-                    $fourteenDaysFlag = true;
-                }
-            }
-            if (request()->get('primary_vaccine_id') == '7' && request()->get('first_vaccine_date')) {
-                $vaccineComplete = true;
-            } elseif (in_array(request()->get('primary_vaccine_id'),['1','2','3','4','5','6','8']) && request()->get('first_vaccine_date') && request()->get('second_vaccine_date') && $fourteenDaysFlag) {
-                $vaccineComplete = true;
-            }
+        if(request()->get('age_in_years') >= 12 || $isVaccinated){
+
+            // if (request()->get('primary_vaccine_id') == '7') {
+            //     $dateToCompare = request()->get('first_vaccine_date');
+            // } else {
+            //     $dateToCompare = request()->get('second_vaccine_date');
+            // }
+            // if ($dateToCompare) {
+            //     $fourteenDaysFlag = false;
+            //     if (Time::differenceInDays($dateToCompare, now()) > 14) {
+            //         $fourteenDaysFlag = true;
+            //     }
+            // }
+            // if (request()->get('primary_vaccine_id') == '7' && request()->get('first_vaccine_date')) {
+            //     $vaccineComplete = true;
+            // } elseif (in_array(request()->get('primary_vaccine_id'), [
+            //         '1', '2', '3', '4', '5', '6', '8',
+            //     ]) && request()->get('first_vaccine_date') && request()->get('second_vaccine_date') && $fourteenDaysFlag) {
+            //     $vaccineComplete = true;
+            // }
+            $vaccineComplete = true;
         }
 
         if ($vaccineComplete) {
@@ -206,26 +164,24 @@ class DeclarationController extends ModularController
         //Create user
         $declaration = Declaration::create(request()->all());
 
-        if (filter_var($declaration->email, FILTER_VALIDATE_EMAIL)) {
-            if ($declaration->decision == "You are Allowed to Travel") {
-                $content = null;
-                if (isset($declaration->id)) {
-                    $content .= route('declarations.show', $declaration->id);
-                }
-
-                $fileName = public_path(config('mainframe.config.upload_root'))."Declaration of-".$declaration->passenger_name." on ".formatDateTime($declaration->created_at).".pdf";
-                $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
-                $pdf = PDF::loadView($view, [
-                    'declaration' => $declaration,
-                    'content' => $content,
-                ]);
-                $pdf->save($fileName);
-            }
-            Mail::to($declaration->email)
-                ->queue(new EmailToPassenger($declaration));
-        }
-
-
+        // if (filter_var($declaration->email, FILTER_VALIDATE_EMAIL)) {
+        //     if ($declaration->decision == "You are Allowed to Travel") {
+        //         $content = null;
+        //         if (isset($declaration->id)) {
+        //             $content .= route('declarations.show', $declaration->id);
+        //         }
+        //
+        //         $fileName = public_path(config('mainframe.config.upload_root'))."Declaration of-".$declaration->passenger_name." on ".formatDateTime($declaration->created_at).".pdf";
+        //         $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
+        //         $pdf = PDF::loadView($view, [
+        //             'declaration' => $declaration,
+        //             'content' => $content,
+        //         ]);
+        //         $pdf->save($fileName);
+        //     }
+        //     Mail::to($declaration->email)
+        //         ->queue(new EmailToPassenger($declaration));
+        // }
 
         return $this->redirect(route('healthDeclaration-post', $declaration->uuid));
     }
@@ -236,8 +192,8 @@ class DeclarationController extends ModularController
      */
     public function healthDeclarationPost($uuid): \Illuminate\Contracts\View\View
     {
-        $declaration = Declaration::where('uuid',$uuid)->first();
-        if($declaration){
+        $declaration = Declaration::where('uuid', $uuid)->first();
+        if ($declaration) {
             return View::make('projects.health-declaration.modules.declarations.public.postDeclaration', compact(['declaration', $declaration]));
 
         }
@@ -251,8 +207,8 @@ class DeclarationController extends ModularController
      */
     public function healthDeclarationPrint($uuid): \Illuminate\Contracts\View\View
     {
-        $declaration = Declaration::where('uuid',$uuid)->first();
-        if($declaration){
+        $declaration = Declaration::where('uuid', $uuid)->first();
+        if ($declaration) {
             $content = null;
 
             if (isset($declaration->id)) {
@@ -263,12 +219,13 @@ class DeclarationController extends ModularController
 
         }
         abort(404);
-   }
+    }
 
-    public function downloadPdf($uuid) {
+    public function downloadPdf($uuid)
+    {
         // Resolve file name and blade view
-        $declaration = Declaration::where('uuid',$uuid)->first();
-        if($declaration){
+        $declaration = Declaration::where('uuid', $uuid)->first();
+        if ($declaration) {
             $content = null;
             if (isset($declaration->id)) {
                 $content .= route('declarations.show', $declaration->id);

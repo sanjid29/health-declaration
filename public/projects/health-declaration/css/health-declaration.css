@@ -13,3 +13,9 @@
 /*.content-wrapper{*/
 /*    margin-left: auto!important;*/
 /*}*/
+
+label.required::after {
+    font-weight: bold;
+    color: red;
+    content: "* ";
+}

@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="row">
-        <h3 align="center" style="color:red !important;padding: 5px;">Health Declaration Form</h3>
+        <h2 align="center" style="color:green !important;padding: 5px;">Health Declaration Form</h2>
     </div>
     <div class="row">
         <div class="col-md-12 ">
