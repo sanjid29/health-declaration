@@ -8987,8 +8987,8 @@ works properly when clicked or hovered */
         <tr>
             <td>Passport No</td>
             <td>{{$declaration->passport_no}}</td>
-            <td>Nationality</td>
-            <td>{{$declaration->nationality}}</td>
+            <td>Age</td>
+            <td>{{$declaration->age_in_years}}</td>
 
         </tr>
         <tr>
@@ -9010,15 +9010,15 @@ works properly when clicked or hovered */
         <tr>
             <td>Has COVID-19 Vaccination</td>
             <td>{{formatYesNo($declaration->is_vaccinated)}}</td>
-            <td>Covid-19 Vaccination Name</td>
-            <td>{{$declaration->primary_vaccine_name}}</td>
+{{--            <td>Covid-19 Vaccination Name</td>--}}
+{{--            <td>{{$declaration->primary_vaccine_name}}</td>--}}
         </tr>
-        <tr>
-            <td>1st Dose Date</td>
-            <td>{{$declaration->first_vaccine_date}}</td>
-            <td>2nd Dose Date</td>
-            <td>{{$declaration->second_vaccine_date}}</td>
-        </tr>
+{{--        <tr>--}}
+{{--            <td>1st Dose Date</td>--}}
+{{--            <td>{{$declaration->first_vaccine_date}}</td>--}}
+{{--            <td>2nd Dose Date</td>--}}
+{{--            <td>{{$declaration->second_vaccine_date}}</td>--}}
+{{--        </tr>--}}
         <tr>
             <td>Has Taken RT-PCR</td>
             <td>{{formatYesNo($declaration->is_rt_pcr_negative)}}</td>
