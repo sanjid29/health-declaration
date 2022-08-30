@@ -11,43 +11,24 @@
 
 @section('content')
     <div class="clearfix"></div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-green-active">
-            <a href="#" style="color:white">
+    <div class="col-md-3">
+        <div class="info-box bg-smart-blue">
+            <a href="{{route('declarations.index')}}" style="color:white"> <span class="info-box-text" align="center">Health Declaration </span>
                 <span class="info-box-icon">
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <i class="fa fa-building" aria-hidden="true"></i>
                 </span>
             </a>
-
             <div class="info-box-content">
-                <span class="info-box-text">Declaration</span>
-                <span class="info-box-number">{{$adminData['declarations']}}</span>
+
+                <span class="info-box-number">Total : {{$adminData['declarations']}}</span>
+                <span class="info-box-number">Archived : {{$adminData['archived-declarations']}}</span>
+                <span class="info-box-number">Created Today : {{$adminData['today-declarations']}}</span>
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
 
-    <?php
-    $datatable = new \App\Projects\HealthDeclaration\Datatables\DeclarationDatatable();
-
-
-    // echo classKey($datatable). "<br>";
-    // echo classKey('MyClass'). "<br>";
-    // echo classKey('\MyClass'). "<br>";
-    // echo classKey('\Some\Path\MyClass'). "<br>";
-    //
-    // echo classVar($datatable). "<br>";
-    // echo classVar('MyClass'). "<br>";
-    // echo classVar('\MyClass'). "<br>";
-    // echo classVar('\Some\Path\MyClass'). "<br>";
-    //
-    // echo classSnakeKey($datatable). "<br>";
-    // echo classSnakeKey('MyClass'). "<br>";
-    // echo classSnakeKey('\MyClass'). "<br>";
-    // echo classSnakeKey('\Some\Path\MyClass'). "<br>";
-
-    ?>
-    @include('mainframe.layouts.module.grid.includes.datatable',['datatable'=>$datatable])
+    @include('projects.health-declaration.dashboards.includes.declaration-datatable')
     <div class="clearfix"></div>
 
     <?php

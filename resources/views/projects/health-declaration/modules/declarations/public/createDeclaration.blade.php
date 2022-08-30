@@ -79,6 +79,7 @@
         <h4>Symptoms</h4>
         <div id="covid-symptoms">
             @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
+            @include('form.select-array',['var'=>['name'=>'have_monkey_pox_symptoms','label'=>'Do you have any following symptoms ( Fever, Rash, Vesicle, Skin lesion, Pain or Swelling or Lymph node) ? / আপনার কি নিম্নলিখিত উপসর্গ আছে (জ্বর, ফুসকুড়ি, ভেসিকল, ত্বকের ক্ষত, ব্যথা বা ফোলা বা লিম্ফ নোড) ?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
         </div>
         <div class="clearfix"></div>
         <h4>Covid 19 Information</h4>

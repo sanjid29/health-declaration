@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card-body">
-        <h4>Health Declaration has been created successfully. An email has been sent to your email address</h4>
+        <h4>Health Declaration has been created successfully. </h4>
         @if($declaration->decision=="You are Allowed to Travel")
             <h4 style="color:green !important;padding: 5px; font-weight: 600;">You are Allowed to Travel</h4>
             <h4 style="color:green !important;padding: 5px; font-weight: 600;">You can download/print the pdf by clicking below</h4>

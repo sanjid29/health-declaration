@@ -58,6 +58,7 @@ class Declaration extends BaseModule
         'local_contact_no',
         'address',
         'have_covid_symptoms',
+        'have_monkey_pox_symptoms',
         'is_vaccinated',
         'is_rt_pcr_negative',
         'first_vaccine_date',
@@ -71,6 +72,7 @@ class Declaration extends BaseModule
         'decision',
         'remark',
         'is_active',
+        'is_archived',
     ];
 
     // protected $guarded = [];

@@ -60,8 +60,8 @@
     <div class="clearfix"></div>
     <h4> Decision: {{$declaration->decision}}</h4>
     <div class="clearfix"></div>
-    @if(isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)
-        <h4>After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
+    @if((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms) || isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
+    <h4>After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
     @endif
 
     <h4>Personal Information</h4>
@@ -98,15 +98,15 @@
         <tr>
             <td>Has COVID-19 Vaccination</td>
             <td>{{formatYesNo($declaration->is_vaccinated)}}</td>
-            <td>Covid-19 Vaccination Name</td>
-            <td>{{$declaration->primary_vaccine_name}}</td>
+            {{--            <td>Covid-19 Vaccination Name</td>--}}
+            {{--            <td>{{$declaration->primary_vaccine_name}}</td>--}}
         </tr>
-        <tr>
-            <td>1st Dose Date</td>
-            <td>{{$declaration->first_vaccine_date}}</td>
-            <td>2nd Dose Date</td>
-            <td>{{$declaration->second_vaccine_date}}</td>
-        </tr>
+        {{--        <tr>--}}
+        {{--            <td>1st Dose Date</td>--}}
+        {{--            <td>{{$declaration->first_vaccine_date}}</td>--}}
+        {{--            <td>2nd Dose Date</td>--}}
+        {{--            <td>{{$declaration->second_vaccine_date}}</td>--}}
+        {{--        </tr>--}}
         <tr>
             <td>Negative In RT-PCR test in last 72 hours?</td>
             <td>{{formatYesNo($declaration->is_rt_pcr_negative)}}</td>

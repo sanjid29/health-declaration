@@ -15,6 +15,8 @@ class AddMonkeyPoxFieldInDeclarations extends Migration
     {
         Schema::table('declarations', function (Blueprint $table) {
             //
+            $table->tinyInteger('have_monkey_pox_symptoms')->nullable()->default(null)->after('have_covid_symptoms');
+            $table->tinyInteger('is_archived')->nullable()->default(null)->after('remark');
         });
     }
 

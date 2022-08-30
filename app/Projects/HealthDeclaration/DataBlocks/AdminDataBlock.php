@@ -4,6 +4,7 @@ namespace App\Projects\HealthDeclaration\DataBlocks;
 
 use App\Projects\HealthDeclaration\Features\DataBlocks\DataBlock;
 use App\Projects\HealthDeclaration\Modules\Declarations\Declaration;
+use Carbon\Carbon;
 
 class AdminDataBlock extends DataBlock
 {
@@ -28,9 +29,15 @@ class AdminDataBlock extends DataBlock
     {
 
         $total = Declaration::count();
+        $archivedTotal = Declaration::where('is_archived', 1)->count();
+        $today = Carbon::today()->format('Y-m-d H:i:s');
+        $yesterday = Carbon::yesterday()->format('Y-m-d H:i:s');
+        $totalToday = Declaration::whereBetween('created_at', [$yesterday, $today])->count();
 
         $this->data = [
             'declarations' => $total,
+            'archived-declarations' =>$archivedTotal,
+            'today-declarations' =>$totalToday,
         ];
     }
 
