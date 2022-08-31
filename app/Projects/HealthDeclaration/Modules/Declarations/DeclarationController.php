@@ -84,7 +84,7 @@ class DeclarationController extends ModularController
             //'email' => 'nullable|email:rfc,dns,filter,strict',
 
             'age_in_years' => 'required',
-            'start_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
+            'arrival_date' => 'required|after:'.$threeDaysBefore.'|before:'.$threeDaysAfter,
 
             'gender' => 'required',
             'country_code_mobile_number' => 'required',
@@ -106,6 +106,7 @@ class DeclarationController extends ModularController
 
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         if (request()->has('journey_from_country_id') && request()->get('journey_from_country_id')) {
             request()->merge(['journey_from_country_name' => Country::find(request()->get('journey_from_country_id'))->name]);
         }
@@ -115,12 +116,12 @@ class DeclarationController extends ModularController
         if (request()->has('district_id') && request()->get('district_id')) {
             request()->merge(['district_name' => District::find(request()->get('district_id'))->name]);
         }
-        if (request()->has('upazila_id') && request()->get('upazila_id')) {
-            request()->merge(['upazila_name' => Upazila::find(request()->get('upazila_id'))->name]);
-        }
-        if (request()->has('primary_vaccine_id') && request()->get('primary_vaccine_id')) {
-            request()->merge(['primary_vaccine_name' => Vaccine::find(request()->get('primary_vaccine_id'))->name]);
-        }
+        // if (request()->has('upazila_id') && request()->get('upazila_id')) {
+        //     request()->merge(['upazila_name' => Upazila::find(request()->get('upazila_id'))->name]);
+        // }
+        // if (request()->has('primary_vaccine_id') && request()->get('primary_vaccine_id')) {
+        //     request()->merge(['primary_vaccine_name' => Vaccine::find(request()->get('primary_vaccine_id'))->name]);
+        // }
 
         $isVaccinated = request()->get('is_vaccinated');
         $hasRtPCRNegative = request()->get('is_rt_pcr_negative');

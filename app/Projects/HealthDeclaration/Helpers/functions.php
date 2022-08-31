@@ -24,7 +24,16 @@ function formatDateTime($date)
     return Date::formattedDateTime($date);
 }
 
-function formatYesNo($data)
+function formatBoolean($data): string
+{
+    if ($data == 1) {
+        return "Yes";
+    }
+
+    return "No";
+}
+
+function formatYesNo($data): string
 {
     if ($data == 1) {
         return '<span style="color:red; font-weight:bolder"> Yes </span>';

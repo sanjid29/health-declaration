@@ -11039,7 +11039,7 @@ works properly when clicked or hovered */
 
         <tr>
             <td>Has COVID-19 Vaccination</td>
-            <td>{{formatYesNo($declaration->is_vaccinated)}}</td>
+            <td>{!!formatBoolean($declaration->is_vaccinated)!!}</td>
             {{--            <td>Covid-19 Vaccination Name</td>--}}
             {{--            <td>{{$declaration->primary_vaccine_name}}</td>--}}
         </tr>
@@ -11051,9 +11051,9 @@ works properly when clicked or hovered */
         {{--        </tr>--}}
         <tr>
             <td>Has Taken RT-PCR</td>
-            <td>{{formatYesNo($declaration->is_rt_pcr_negative)}}</td>
+            <td>{!!formatBoolean($declaration->is_rt_pcr_negative)!!}</td>
             <td>Declaration Created At</td>
-            <td>{{formatDateTime($declaration->created_at)}}</td>
+            <td>{{formatDateTime($declaration->created_at)}} </td>
         </tr>
 
     </table>

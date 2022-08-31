@@ -97,7 +97,7 @@
 
         <tr>
             <td>Has COVID-19 Vaccination</td>
-            <td>{{formatYesNo($declaration->is_vaccinated)}}</td>
+            <td>{!!formatBoolean($declaration->is_vaccinated)!!}</td>
             {{--            <td>Covid-19 Vaccination Name</td>--}}
             {{--            <td>{{$declaration->primary_vaccine_name}}</td>--}}
         </tr>
@@ -109,7 +109,7 @@
         {{--        </tr>--}}
         <tr>
             <td>Negative In RT-PCR test in last 72 hours?</td>
-            <td>{{formatYesNo($declaration->is_rt_pcr_negative)}}</td>
+            <td>{!!formatBoolean($declaration->is_rt_pcr_negative)!!}</td>
             <td>Declaration Created at</td>
             <td>{{formatDateTime($declaration->created_at)}}</td>
         </tr>

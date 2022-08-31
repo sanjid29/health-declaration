@@ -3,6 +3,7 @@
 namespace App\Projects\HealthDeclaration\Modules\Declarations;
 
 use \App\Projects\HealthDeclaration\Features\Datatable\ModuleDatatable;
+use Carbon\Carbon;
 
 class DeclarationDatatable extends ModuleDatatable
 {
@@ -102,17 +103,18 @@ class DeclarationDatatable extends ModuleDatatable
         // if (request('id')) { // Example code
         //     $query->where('id', request('id'));
         // }
+
         if(request('arrival_date')){
-            $start_date = date_create(\Request::get('arrival_date'))->format('Y-m-d 00:00:00');
-            $end_date = date_create(\Request::get('arrival_date'))->format('Y-m-d 23:59:59');
+            $start_date = Carbon::create(request('arrival_date'));
+            $end_date=Carbon::create(request('arrival_date'))->addDays(1);
             request()->merge([
                 'arrival_date_from'=>$start_date,
                 'arrival_date_till'=>$end_date
             ]);
         }
         if (request('arrival_date_from') && request('arrival_date_till')) {
-            $start_date = date_create(\Request::get('arrival_date_from'))->format('Y-m-d H:i:s');
-            $end_date = date_create(\Request::get('arrival_date_till'))->format('Y-m-d 23:59:59');
+            $start_date = Carbon::create(request('arrival_date_from'));
+            $end_date = Carbon::create(request('arrival_date_till'));
             $query->whereBetween('arrival_date', [$start_date, $end_date]);
         }
         if (request('have_covid_symptoms')) {

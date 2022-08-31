@@ -28,7 +28,9 @@
     </div>
     <div class="clearfix"></div>
 
+    @include('projects.health-declaration.dashboards.includes.daily-declaration-datatable')
     @include('projects.health-declaration.dashboards.includes.declaration-datatable')
+
     <div class="clearfix"></div>
 
     <?php
