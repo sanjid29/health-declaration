@@ -6,9 +6,12 @@
  * @var array $columns
  * @var \App\Mainframe\Features\Core\ViewProcessor $view
  */
-$datatable = new \App\Projects\HealthDeclaration\Datatables\DeclarationDatatable();
-$today=\Carbon\Carbon::today();
 
+use Carbon\Carbon;
+
+$datatable = new \App\Projects\HealthDeclaration\Datatables\DeclarationDatatable();
+
+$today = Carbon::today()->format('Y-m-d');
 $titles = $datatable->titles();
 $columnsJson = $datatable->columnsJson();
 $ajaxUrl = $datatable->ajaxUrl().'?arrival_date='.$today;

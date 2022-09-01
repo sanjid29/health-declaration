@@ -22,7 +22,7 @@
 
                 <span class="info-box-number">Total : {{$adminData['declarations']}}</span>
                 <span class="info-box-number">Archived : {{$adminData['archived-declarations']}}</span>
-                <span class="info-box-number">Created Today : {{$adminData['today-declarations']}}</span>
+                <span class="info-box-number">Arriving Today : {{$adminData['today-declarations']}}</span>
             </div>
         </div>
     </div>

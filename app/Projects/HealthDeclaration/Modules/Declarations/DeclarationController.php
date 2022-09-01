@@ -81,6 +81,7 @@ class DeclarationController extends ModularController
             'passenger_name' => 'required',
             'mobile_no' => 'required|numeric',
             'passport_no' => 'required',
+            'nationality' => 'required',
             //'email' => 'nullable|email:rfc,dns,filter,strict',
 
             'age_in_years' => 'required',

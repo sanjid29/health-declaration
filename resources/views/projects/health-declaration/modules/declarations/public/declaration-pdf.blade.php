@@ -11002,8 +11002,9 @@ works properly when clicked or hovered */
 
     <div class="clearfix"></div>
     <h4> Decision: {{$declaration->decision}}</h4>
-    @if((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms) || isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
-    <h4>After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
+    @if(((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)) || (isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
+        <h4 style="color:red;">After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
+        <h4 style="color:red;">বাংলাদেশে আসার পর ইমিগ্রেশনের আগে হেলথ ডেস্কের সাথে যোগাযোগ করুন</h4>
     @endif
     <div class="clearfix"></div>
     <h4>Personal Information</h4>
@@ -11029,7 +11030,7 @@ works properly when clicked or hovered */
         </tr>
         <tr>
             <td>Journey Starting Date</td>
-            <td>{{formatDate($declaration->start_date)}}</td>
+            <td>{{formatDate($declaration->arrival_date)}}</td>
             <td>Staying At</td>
             <td>{{$declaration->division_name." , ".$declaration->district_name}}</td>
         </tr>

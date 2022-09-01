@@ -104,13 +104,9 @@ class DeclarationDatatable extends ModuleDatatable
         //     $query->where('id', request('id'));
         // }
 
-        if(request('arrival_date')){
+        if (request('arrival_date')) {
             $start_date = Carbon::create(request('arrival_date'));
-            $end_date=Carbon::create(request('arrival_date'))->addDays(1);
-            request()->merge([
-                'arrival_date_from'=>$start_date,
-                'arrival_date_till'=>$end_date
-            ]);
+            $query->where('arrival_date', $start_date);
         }
         if (request('arrival_date_from') && request('arrival_date_till')) {
             $start_date = Carbon::create(request('arrival_date_from'));
@@ -135,8 +131,6 @@ class DeclarationDatatable extends ModuleDatatable
         if (request('flight_no')) {
             $query->where('flight_no', request('flight_no'));
         }
-
-
 
         return $query;
     }
@@ -177,7 +171,7 @@ class DeclarationDatatable extends ModuleDatatable
             $dt->editColumn('have_monkey_pox_symptoms', function ($row) { return formatYesNo($row->have_monkey_pox_symptoms); });
         }
         if ($this->hasColumn('is_vaccinated')) {
-            $dt->editColumn('is_vaccinated', function ($row) { return formatYesNo($row->is_vaccinated); });
+            $dt->editColumn('is_vaccinated', function ($row) { return formatBoolean($row->is_vaccinated); });
         }
 
         return $dt;

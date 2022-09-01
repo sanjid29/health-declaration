@@ -32,7 +32,7 @@ class AdminDataBlock extends DataBlock
         $archivedTotal = Declaration::where('is_archived', 1)->count();
         $today = Carbon::today()->format('Y-m-d');
         $yesterday = Carbon::yesterday()->format('Y-m-d');
-        $totalToday = Declaration::whereBetween('arrival_date', [$yesterday, $today])->count();
+        $totalToday = Declaration::where('arrival_date', $today)->count();
 
         $this->data = [
             'declarations' => $total,

@@ -33,7 +33,7 @@ class Declaration extends BaseModule
         //'email',
         //'start_date',
         'arrival_date',
-        //'nationality',
+        'nationality',
         'country_code_mobile_number',
         'journey_from_country_id',
         'journey_from_country_name',

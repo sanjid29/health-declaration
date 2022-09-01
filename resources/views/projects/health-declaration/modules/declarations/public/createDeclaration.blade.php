@@ -12,21 +12,23 @@
         People’s Republic of Bangladesh mandatory requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
         form as a part of health screening at the port of entry.
     </h4>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">Form should be filled within 72 hours prior to Departure time.</h5>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">Not Applicable for kids of twelve or less years old. </h5>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">Except for Janssen (Johnson & Johnson), other vaccines must have two doses to be
-        considered completed.</h5>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;"> If Vaccine is not completed, RT-PCR negative form must be filled.</h5>
+    <h5 style="color:red !important;font-weight: 600;">
+        Form should be filled within 72 hours prior to Departure time.
+        Not Applicable for kids of twelve or less years old.
+        Except for Janssen (Johnson & Johnson), other vaccines must have two doses to be
+        considered completed.
+        If Vaccine is not completed, RT-PCR negative form must be filled.</h5>
 
     <h4 style="padding: 2px;">
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
     </h4>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">যাত্রা সময়ের 72 ঘন্টার মধ্যে ফর্মটি পূরণ করতে হবে। </h5>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">বারো বা তার কম বয়সী বাচ্চাদের জন্য প্রযোজ্য নয়। </h5>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">Janssen (Johnson & Johnson) ব্যতীত, অন্যান্য টিকা সম্পূর্ণ বলে বিবেচনা করার জন্য দুটি ডোজ
-        থাকতে হবে। </h5>
-    <h5 style="color:red !important;padding: 5px; font-weight: 600;">ভ্যাকসিন সম্পূর্ণ না হলে, RT-PCR নেগেটিভ ফর্ম অবশ্যই পূরণ করতে হবে। </h5>
+    <h5 style="color:red !important; font-weight: 600;">
+        যাত্রা সময়ের 72 ঘন্টার মধ্যে ফর্মটি পূরণ করতে হবে।
+        বারো বা তার কম বয়সী বাচ্চাদের জন্য প্রযোজ্য নয়।
+        Janssen (Johnson & Johnson) ব্যতীত, অন্যান্য টিকা সম্পূর্ণ বলে বিবেচনা করার জন্য দুটি ডোজ
+        থাকতে হবে।
+        ভ্যাকসিন সম্পূর্ণ না হলে, RT-PCR নেগেটিভ ফর্ম অবশ্যই পূরণ করতে হবে।</h5>
     <div class="card-body">
 
         {{ Form::open(['route' => 'healthDeclaration-store','class'=>"form", 'name'=>'healthDeclaration-form', 'id'=>'healthDeclaration-form']) }}
@@ -34,6 +36,7 @@
         @include('form.select-model',['var'=>['name'=>'journey_from_country_id','label'=>'Country of Origin of Travel/যে দেশ থেকে যাত্রা শুরু করেছেন','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Country::class,]])
         @include('form.text',['var'=>['name'=>'passenger_name','label'=>'Passenger Name/যাত্রীর নাম', 'div'=>'col-sm-12']])
         @include('form.text',['var'=>['name'=>'passport_no','label'=>'Passport No/পাসপোর্ট নম্বর', 'div'=>'col-sm-4']])
+        @include('form.text',['var'=>['name'=>'nationality','label'=>'Nationality/জাতীয়তা', 'div'=>'col-sm-4']])
         @include('form.select-array',['var'=>['name'=>'gender','label'=>'Gender/লিঙ্গ', 'div'=>'col-sm-4','options'=>(\App\Declaration::$genderTypes)]])
         @include('form.number',['var'=>['name'=>'age_in_years','label'=>'Age (in Years)/ বয়স', 'div'=>'col-sm-4','params'=>['min'=>0]]])
         <div class="clearfix"></div>
@@ -72,14 +75,14 @@
         <div id="address-detailed">
             {{--            @include('form.text',['var'=>['name'=>'road','label'=>'Road/রাস্তা', 'div'=>'col-sm-4']])--}}
             @include('form.text',['var'=>['name'=>'address','label'=>'Address/ঠিকানা', 'div'=>'col-sm-8']])
-            @include('form.number',['var'=>['name'=>'local_contact_no','label'=>'Local Phone No/স্থানীয় মোবাইল নম্বর', 'div'=>'col-sm-4']])
+            @include('form.number',['var'=>['name'=>'local_contact_no','label'=>'Local Phone No/স্থানীয় মোবাইল নম্বর', 'div'=>'col-sm-4','placeholder'=>"+880"]])
         </div>
 
         <div class="clearfix"></div>
         <h4>Symptoms</h4>
         <div id="covid-symptoms">
             @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
-            @include('form.select-array',['var'=>['name'=>'have_monkey_pox_symptoms','label'=>'Do you have any following symptoms ( Fever, Rash, Vesicle, Skin lesion, Pain or Swelling or Lymph node) ? / আপনার কি নিম্নলিখিত উপসর্গ আছে (জ্বর, ফুসকুড়ি, ভেসিকল, ত্বকের ক্ষত, ব্যথা বা ফোলা বা লিম্ফ নোড) ?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
+            @include('form.select-array',['var'=>['name'=>'have_monkey_pox_symptoms','label'=>'Do you have any following symptoms ( Fever, Rash, Skin lesion, Pain or Swelling of Lymph node) ? / আপনার কি নিম্নলিখিত উপসর্গ আছে (জ্বর, ফুসকুড়ি, ত্বকের ক্ষত,  লিম্ফ নোড ব্যথা বা ফোলা) ?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
         </div>
         <div class="clearfix"></div>
         <h4>Covid 19 Information</h4>
@@ -153,6 +156,7 @@
 
         $("#healthDeclaration-form input[name=passenger_name]").addClass('validate[required]');
         $("#healthDeclaration-form input[name=passport_no]").addClass('validate[required]');
+        $("#healthDeclaration-form input[name=nationality]").addClass('validate[required]');
         $("#healthDeclaration-form select[name=country_code_mobile_number]").addClass('validate[required]');
         $("#healthDeclaration-form input[name=mobile_no]").addClass('validate[required]');
         $("#healthDeclaration-form input[name=age_in_years]").addClass('validate[required]');
@@ -164,8 +168,9 @@
         $("#healthDeclaration-form select[id=division_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=district_id]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=have_covid_symptoms]").addClass('validate[required]');
+        $("#healthDeclaration-form select[id=have_monkey_pox_symptoms]").addClass('validate[required]');
         $("#healthDeclaration-form select[id=is_vaccinated]").addClass('validate[required]');
-        $("#healthDeclaration-form input[id=flight_no]").addClass('validate[required]');
+        // $("#healthDeclaration-form input[id=flight_no]").addClass('validate[required]');
 
         var collection = document.getElementsByClassName("validate[required]");
         for (let i = 0; i < collection.length; i++) {
