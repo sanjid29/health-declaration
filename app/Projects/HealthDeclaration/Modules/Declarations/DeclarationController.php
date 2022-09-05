@@ -91,9 +91,9 @@ class DeclarationController extends ModularController
             'country_code_mobile_number' => 'required',
             'mode_of_transport' => 'required',
 
-            'division_id' => 'required',
+            //'division_id' => 'required',
             'district_id' => 'required',
-            'local_contact_no' => 'required',
+            //'local_contact_no' => 'required',
 
             'have_covid_symptoms' => 'required',
             'is_vaccinated' => 'required',
@@ -128,7 +128,7 @@ class DeclarationController extends ModularController
         $hasRtPCRNegative = request()->get('is_rt_pcr_negative');
         $decision = $reason = $dateToCompare = null;
         $vaccineComplete = false;
-        if(request()->get('age_in_years') >= 12 || $isVaccinated){
+        if(request()->get('age_in_years') == '0-12' || $isVaccinated){
 
             // if (request()->get('primary_vaccine_id') == '7') {
             //     $dateToCompare = request()->get('first_vaccine_date');

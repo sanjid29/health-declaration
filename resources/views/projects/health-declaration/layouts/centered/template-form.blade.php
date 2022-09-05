@@ -32,9 +32,9 @@
                 </td>
             </tr>
         </table>
-        <div class="login-logo">
-            {{config('app.name')}}
-        </div>
+{{--        <div class="login-logo">--}}
+{{--            {{config('app.name')}}--}}
+{{--        </div>--}}
     </div>
     <div class="row">
         <h2 align="center" style="color:green !important;padding: 5px;">Health Declaration Form</h2>

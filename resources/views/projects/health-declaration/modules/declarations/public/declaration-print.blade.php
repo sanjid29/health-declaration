@@ -58,12 +58,18 @@
     </div>
 
     <div class="clearfix"></div>
-    <h4> Decision: {{$declaration->decision}}</h4>
-    <div class="clearfix"></div>
-    @if(((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)) || (isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
-    <h4 style="color:red;">After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
-    <h4 style="color:red;">বাংলাদেশে আসার পর ইমিগ্রেশনের আগে হেলথ ডেস্কের সাথে যোগাযোগ করুন</h4>
+    @if($declaration->decision=='You are Allowed to Travel')
+        <h4 style="color:green;"> Decision: {{$declaration->decision}}. {!! "&#10003" !!}</h4>
+        <div class="clearfix"></div>
+        @if(((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)) || (isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
+            <h4 style="color:red;">After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
+            <h4 style="color:red;">বাংলাদেশে আসার পর ইমিগ্রেশনের আগে হেলথ ডেস্কের সাথে যোগাযোগ করুন</h4>
+        @endif
+    @else
+        <h4 style="color:red;"> Decision: {{$declaration->decision}}. {!! "&#10060" !!}</h4>
     @endif
+
+
 
     <h4>Personal Information</h4>
     <table class="table table-bordered no-padding" width="100%">
@@ -120,7 +126,8 @@
 @endsection
 @section('content-bottom')
 
-    <h4>Please bring all necessary documents (Vaccination Certificate/Covid-19 Test Result) with this card.</h4>
+    <h4>Please carry all necessary documents (Vaccination Certificate/Covid-19 Test Result) with this card.</h4>
+    <h4>অনুগ্রহ করে এই কার্ডের সাথে সমস্ত প্রয়োজনীয় কাগজপত্র (টিকাকরণ শংসাপত্র/কোভিড-১৯ পরীক্ষার ফলাফল) সঙ্গে রাখুন।</h4>
     {{--    <div class="col-md-6  no-padding pull-left margin">--}}
     {{--        {!! $title ?? '' !!}--}}
     {{--        <span class="small">{!! $content !!}</span>--}}

@@ -11001,12 +11001,19 @@ works properly when clicked or hovered */
     </div>
 
     <div class="clearfix"></div>
-    <h4> Decision: {{$declaration->decision}}</h4>
-    @if(((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)) || (isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
-        <h4 style="color:red;">After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
-        <h4 style="color:red;">বাংলাদেশে আসার পর ইমিগ্রেশনের আগে হেলথ ডেস্কের সাথে যোগাযোগ করুন</h4>
+    @if($declaration->decision=='You are Allowed to Travel')
+        <h4 style="color:green;"> Decision: {{$declaration->decision}}. {!! "&#10003" !!}</h4>
+        <div class="clearfix"></div>
+        @if(((isset($declaration->have_covid_symptoms) && $declaration->have_covid_symptoms)) || (isset($declaration->have_monkey_pox_symptoms) && $declaration->have_monkey_pox_symptoms))
+            <h4 style="color:red;">After coming to Bangladesh please contact with Health Desk Before Immigration</h4>
+            <h4 style="color:red;">বাংলাদেশে আসার পর ইমিগ্রেশনের আগে হেলথ ডেস্কের সাথে যোগাযোগ করুন</h4>
+        @endif
+    @else
+        <h4 style="color:red;"> Decision: {{$declaration->decision}}. {!! "&#10060" !!}</h4>
     @endif
-    <div class="clearfix"></div>
+
+
+
     <h4>Personal Information</h4>
     <table class="table table-bordered no-padding" width="100%">
         <tr>
@@ -11018,8 +11025,8 @@ works properly when clicked or hovered */
         <tr>
             <td>Passport No</td>
             <td>{{$declaration->passport_no}}</td>
-            <td>Age</td>
-            <td>{{$declaration->age_in_years}}</td>
+            <td>Nationality</td>
+            <td>{{$declaration->nationality}}</td>
 
         </tr>
         <tr>
@@ -11029,7 +11036,7 @@ works properly when clicked or hovered */
             <td>{{$declaration->journey_from_country_name}}</td>
         </tr>
         <tr>
-            <td>Journey Starting Date</td>
+            <td>Arrival Date</td>
             <td>{{formatDate($declaration->arrival_date)}}</td>
             <td>Staying At</td>
             <td>{{$declaration->division_name." , ".$declaration->district_name}}</td>
@@ -11051,10 +11058,10 @@ works properly when clicked or hovered */
         {{--            <td>{{$declaration->second_vaccine_date}}</td>--}}
         {{--        </tr>--}}
         <tr>
-            <td>Has Taken RT-PCR</td>
+            <td>Negative In RT-PCR test in last 72 hours?</td>
             <td>{!!formatBoolean($declaration->is_rt_pcr_negative)!!}</td>
-            <td>Declaration Created At</td>
-            <td>{{formatDateTime($declaration->created_at)}} </td>
+            <td>Declaration Created at</td>
+            <td>{{formatDateTime($declaration->created_at)}}</td>
         </tr>
 
     </table>
@@ -11062,7 +11069,8 @@ works properly when clicked or hovered */
 @endsection
 @section('content-bottom')
 
-    <h4>Please bring all necessary documents (Vaccination Certificate/Covid-19 Test Result) with this card.</h4>
+    <h4>Please carry all necessary documents (Vaccination Certificate/Covid-19 Test Result) with this card.</h4>
+    <h4>অনুগ্রহ করে এই কার্ডের সাথে সমস্ত প্রয়োজনীয় কাগজপত্র (টিকাকরণ শংসাপত্র/কোভিড-১৯ পরীক্ষার ফলাফল) সঙ্গে রাখুন।</h4>
     {{--    <div class="col-md-6  no-padding pull-left margin">--}}
     {{--        {!! $title ?? '' !!}--}}
     {{--        <span class="small">{!! $content !!}</span>--}}
