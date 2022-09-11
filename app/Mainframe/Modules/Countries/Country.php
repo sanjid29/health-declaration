@@ -82,6 +82,8 @@ use App\Mainframe\Modules\Countries\Traits\CountryTrait;
  * @property int|null $tenant_id
  * @method static \Illuminate\Database\Eloquent\Builder|Country whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Country whereTenantId($value)
+ * @property string|null $calling_code_with_country
+ * @method static \Illuminate\Database\Eloquent\Builder|Country whereCallingCodeWithCountry($value)
  */
 class Country extends BaseModule
 {

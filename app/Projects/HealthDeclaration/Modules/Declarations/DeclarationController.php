@@ -116,6 +116,8 @@ class DeclarationController extends ModularController
         }
         if (request()->has('district_id') && request()->get('district_id')) {
             request()->merge(['district_name' => District::find(request()->get('district_id'))->name]);
+            request()->merge(['division_id' => District::find(request()->get('district_id'))->division_id]);
+            request()->merge(['division_name' => District::find(request()->get('district_id'))->division_name]);
         }
         // if (request()->has('upazila_id') && request()->get('upazila_id')) {
         //     request()->merge(['upazila_name' => Upazila::find(request()->get('upazila_id'))->name]);
@@ -128,7 +130,7 @@ class DeclarationController extends ModularController
         $hasRtPCRNegative = request()->get('is_rt_pcr_negative');
         $decision = $reason = $dateToCompare = null;
         $vaccineComplete = false;
-        if(request()->get('age_in_years') == '0-12' || $isVaccinated){
+        if (request()->get('age_in_years') == '0-12' || $isVaccinated) {
 
             // if (request()->get('primary_vaccine_id') == '7') {
             //     $dateToCompare = request()->get('first_vaccine_date');

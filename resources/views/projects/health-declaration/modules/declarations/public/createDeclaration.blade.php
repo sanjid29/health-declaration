@@ -12,7 +12,7 @@
         People’s Republic of Bangladesh mandatory requires all the passengers entering through ground crossings, by seaport, or by the airport to fill in this
         form as a part of health screening at the port of entry.
     </h4>
-
+    <h6 style="color:green !important; font-weight: 600;"> If you face any difficulty filling up the form, please call +8801313791222(WhatsApp),+8801322858249. </h6>
     <h6 style="color:red !important;font-weight: 600;">Form should be filled within 72 hours prior to Departure time.</h6>
     <h6 style="color:red !important;font-weight: 600;">Not Applicable for kids of twelve or less years old.</h6>
     <h6 style="color:red !important;font-weight: 600;">Except for Janssen (Johnson & Johnson), other vaccines must have two doses to be
@@ -24,6 +24,8 @@
         সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
     </h4>
+
+    <h6 style="color:green !important; font-weight: 600;"> ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে +8801313791222(WhatsApp),+8801322858249 নাম্বারে ফোন করুন।</h6>
     <h6 style="color:red !important; font-weight: 600;"> যাত্রা সময়ের 72 ঘন্টার মধ্যে ফর্মটি পূরণ করতে হবে।</h6>
     <h6 style="color:red !important; font-weight: 600;"> বারো বা তার কম বয়সী বাচ্চাদের জন্য প্রযোজ্য নয়।</h6>
     <h6 style="color:red !important; font-weight: 600;"> Janssen (Johnson & Johnson) ব্যতীত, অন্যান্য টিকা সম্পূর্ণ বলে বিবেচনা করার জন্য দুটি ডোজ থাকতে
@@ -39,12 +41,12 @@
         @include('form.text',['var'=>['name'=>'passport_no','label'=>'Passport No/পাসপোর্ট নম্বর', 'div'=>'col-sm-4','params'=>['autocomplete=off']]])
         @include('form.text',['var'=>['name'=>'nationality','label'=>'Nationality/জাতীয়তা', 'div'=>'col-sm-4','params'=>['autocomplete=off']]])
         @include('form.select-array',['var'=>['name'=>'gender','label'=>'Gender/লিঙ্গ', 'div'=>'col-sm-4','options'=>(\App\Declaration::$genderTypes),'params'=>['autocomplete=off']]])
-       @include('form.select-array',['var'=>['name'=>'age_in_years','label'=>'Age (in Years)/ বয়স', 'div'=>'col-sm-4','options'=>kv(\App\Declaration::$ageGroups),'params'=>['autocomplete=off']]])
+        @include('form.select-array',['var'=>['name'=>'age_in_years','label'=>'Age (in Years)/ বয়স', 'div'=>'col-sm-4','options'=>kv(\App\Declaration::$ageGroups),'params'=>['autocomplete=off']]])
 
         <div class="clearfix"></div>
         <h5>Passenger's Contact Number / যাত্রীর যোগাযোগের নম্বর </h5>
         @include('form.select-model',['var'=>['name'=>'country_code_mobile_number','label'=>'Country Code/কান্ট্রি কোড','div'=>'col-sm-2','name_field'=>'calling_code_with_country','value_field'=>'calling_code', 'model'=>\App\Country::class,'params'=>['autocomplete=off']]])
-        @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Phone No/মোবাইল নম্বর', 'div'=>'col-sm-4','params'=>['autocomplete=off']]])
+        @include('form.number',['var'=>['name'=>'mobile_no','label'=>'Mobile No/মোবাইল নম্বর', 'div'=>'col-sm-4','params'=>['autocomplete=off']]])
         <div class="clearfix"></div>
         <h4>Travel Information / ভ্রমণ তথ্য</h4>
         @include('form.select-array',['var'=>['name'=>'mode_of_transport','label'=>'Mode of Travel/পরিবহনের ধরণ', 'div'=>'col-sm-4','options'=>(\App\Declaration::$modeOfTransportTypes)]])
@@ -95,10 +97,10 @@
             <h5>I, hereby, declare that the information provided in this form true and valid to the best of my knowledge.
                 Giving false information or hiding truth will the penalized in accordance with the law.
             </h5>
-            <h5> If you face any difficulty filling up the form, please call 01313791222,01322858249. </h5>
+
             <h5>আমি এই মর্মে ঘোষণা করছি আমার জানামতে এ সকল তথ্য সত্য।ভুল তথ্য প্রদান বা সঠিক তথ্য গোপন করলে তা আইনত দন্ডনীয়
                 অপরাধ হিসেবে গণ্য করা হবে এবং বিধি মোতাবেক ব্যবস্থা নেওয়া হবে|</h5>
-            <h5> ফর্মটি পূরণ করার সময় কোনো সমস্যা হলে বা কোনো কিছু জানার থাকলে 01313791222,01322858249 নাম্বারে ফোন করুন।</h5>
+
         </div>
         <div class="form-group row mb-0" id="divSubmit">
             <div class="col-md-12">
@@ -190,7 +192,6 @@
                 }
             }).trigger('change');
         }
-
 
     </script>
 @endsection
