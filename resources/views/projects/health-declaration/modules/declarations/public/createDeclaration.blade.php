@@ -21,7 +21,7 @@
     <h6 style="color:red !important;font-weight: 600;">Booster Dose is not mandatory.</h6>
 
     <h4 style="padding: 2px;">
-        সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের করোনাভাইরাস (কোভিড-১৯) সংক্রমণ
+        সকল তথ্যের গোপনীয়তা রক্ষা করা হবে এবং জনস্বাস্থ্য সংক্রান্ত কাজের জন্য ব্যবহৃত হবে। গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সংক্রামক রোগ
         স্ক্রিনিং কার্যক্রমের অংশ হিসাবে দেশের স্থল/নৌ/ বিমানবন্দর সমূহের মাধ্যমে দেশে প্রবেশকারীদের নিচের তথ্যগুলি পূরণ করতে হবে।
     </h4>
 
@@ -71,14 +71,14 @@
             @include('form.select-array',['var'=>['name'=>'have_monkey_pox_symptoms','label'=>'Do you have any following symptoms ( Fever, Rash, Skin lesion, Pain or Swelling of Lymph node) ? / আপনার কি নিম্নলিখিত উপসর্গ আছে (জ্বর, ফুসকুড়ি, ত্বকের ক্ষত,  লিম্ফ নোড ব্যথা বা ফোলা) ?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
         </div>
         <div class="clearfix"></div>
-        <h4>Covid 19 Information / কোভিড 19 তথ্য</h4>
+        <h4>Covid 19 Information / কোভিড ১৯ তথ্য</h4>
         <div class="clearfix"></div>
         <div id="vaccine-info">
             <h6>Information of Covid-19 Vaccination/আপনার কোভিড-১৯ টিকার তথ্য</h6>
             <div class="clearfix"></div>
             @include('form.select-array',['var'=>['name'=>'is_vaccinated','label'=>'Have You Taken Complete Vaccination For COVID-19? /আপনি কি কোভিড-১৯ এর জন্য সম্পূর্ণ টিকা নিয়েছেন?', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])
             <div class="clearfix"></div>
-            <h6>If Yes, show Covid-19 Vaccination Card and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+            <h6>If Yes, please carry Covid-19 Vaccination Card/ টিকার কার্ডটি সাথে রাখুন</h6>
             <div class="clearfix"></div>
         </div>
 
@@ -86,7 +86,7 @@
             <div class="clearfix"></div>
             @include('form.select-array',['var'=>['name'=>'is_rt_pcr_negative','label'=>'Do you have Covid19 rt-PCR negative report within 72 hours of Travel? /আপনার কি ৭২ ঘন্টা মেয়াদী কোভিড-১৯ আরটিপিসিআর নেগেটিভ সনদ রয়েছে?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
             <div class="clearfix"></div>
-            <h6>If Yes, show rt-PCR test result and submit one photocopy/ আরটি-পিসিআর কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>
+            <h6>If Yes, please carry rt-PCR test result/ আরটি-পিসিআর সনদ সাথে রাখুন</h6>
         </div>
 
         <div class="clearfix"></div>
