@@ -28,7 +28,7 @@ class AdminDataBlock extends DataBlock
     public function process()
     {
 
-        $total = Declaration::count();
+        $total = Declaration::where('is_active',1)->count();
         $archivedTotal = Declaration::where('is_archived', 1)->count();
         $today = Carbon::today()->format('Y-m-d');
         $yesterday = Carbon::yesterday()->format('Y-m-d');
