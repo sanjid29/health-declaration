@@ -43,7 +43,8 @@ class ArchiveDeclarations extends Command
     {
         $today=Carbon::today();
 
-       Declaration::where('created_at','<=',$today->subDays('30'))->chunk(100,function($declarations){
+       Declaration::where('is_archived','!=',1)
+           ->where('created_at','<=',$today->subDays('30'))->chunk(100,function($declarations){
           foreach($declarations as $declaration){
               $declaration->update([
                   'is_archived'=>'1'
