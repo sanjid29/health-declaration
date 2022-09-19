@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 use PDF;
+//use Barryvdh\DomPDF\Facade\Pdf;
 use Request;
 use View;
 

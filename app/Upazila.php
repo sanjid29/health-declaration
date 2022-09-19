@@ -69,6 +69,8 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|Upazila whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Upazila whereUuid($value)
  * @mixin \Eloquent
+ * @property-read \App\District|null $district
+ * @property-read \App\Division|null $division
  */
 class Upazila extends \App\Projects\HealthDeclaration\Modules\Upazilas\Upazila
 {
