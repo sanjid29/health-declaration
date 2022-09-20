@@ -20,7 +20,7 @@ class DeclarationDatatable extends ModuleDatatable
     public function source()
     {
         // return \DB::table($this->table)->leftJoin('users as updater', 'updater.id', $this->table.'.updated_by'); // Old table based implementation
-        return Declaration::with(['updater:id,name', 'primaryVaccine:name', 'journeyFromCountry:name']); // Model based query.
+        return Declaration::remember('medium')->with(['updater:id,name', 'primaryVaccine:name', 'journeyFromCountry:name']); // Model based query.
     }
 
     public function query()
