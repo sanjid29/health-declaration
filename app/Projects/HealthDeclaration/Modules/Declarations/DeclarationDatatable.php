@@ -31,10 +31,9 @@ class DeclarationDatatable extends ModuleDatatable
 
         if (request('is_archived') == 1) { // Example code
             $query->where('is_archived', request('is_archived'));
+
         } else {
-            $query->where(function ($q) {
-                $q->whereNull('is_archived')->orWhere('is_archived', 0);
-            });
+            $query->where('is_archived', 0);
         }
         if (request('show_all') == 1) {
             $query = $this->source()->select($this->selects());
