@@ -228,6 +228,18 @@ class DeclarationController extends ModularController
 
     public function downloadPdf($uuid)
     {
+        $application = $foreignStudentApplication;
+
+        if (!$this->user->can('view', $application)) {
+            return $this->permissionDenied();
+        }
+        $data = [
+            'application' => $application,
+            'render' => 'pdf', // Note: This is passed to determine show/hide of the print button.
+        ];
+        $pdf = PDF::loadView('projects.dgme-students.modules.foreign-student-applications.print-pdf.print', $data);
+
+        return $pdf->download("Foreign-Application-".$application->id.".pdf");
         // Resolve file name and blade view
         $declaration = Declaration::where('uuid', $uuid)->first();
         if ($declaration) {
