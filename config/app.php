@@ -169,6 +169,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Collective\Remote\RemoteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         /*---------------------------------
         | Section: Default Application Service providers
         |---------------------------------*/
@@ -243,7 +244,9 @@ return [
         | Section: Additional packages
         |------------------------------------------*/
         'SSH' => Collective\Remote\RemoteFacade::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        //'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+
         /*-------------------------------------------------------------------------
         | Section: Alias Mainframe module classes. A good place to override Mainframe class reference
         |-------------------------------------------------------------------------*/

@@ -15,8 +15,9 @@ use App\Vaccine;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Mail;
-use PDF;
+
 //use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 use Request;
 use View;
 
@@ -228,31 +229,20 @@ class DeclarationController extends ModularController
 
     public function downloadPdf($uuid)
     {
-        $application = $foreignStudentApplication;
-
-        if (!$this->user->can('view', $application)) {
-            return $this->permissionDenied();
-        }
-        $data = [
-            'application' => $application,
-            'render' => 'pdf', // Note: This is passed to determine show/hide of the print button.
-        ];
-        $pdf = PDF::loadView('projects.dgme-students.modules.foreign-student-applications.print-pdf.print', $data);
-
-        return $pdf->download("Foreign-Application-".$application->id.".pdf");
-        // Resolve file name and blade view
         $declaration = Declaration::where('uuid', $uuid)->first();
-        if ($declaration) {
+        if($declaration){
+            $fileName = "Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
+            $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
             $content = null;
             if (isset($declaration->id)) {
                 $content .= route('declarations.show', $declaration->id);
             }
-            $fileName = "Declaration of-".$declaration->passenger_name." on ".formatDate($declaration->created_at).".pdf";
-            $view = 'projects.health-declaration.modules.declarations.public.declaration-pdf';
-            $pdf = PDF::loadView($view, [
+            $data = [
                 'declaration' => $declaration,
                 'content' => $content,
-            ]);
+                'render' => 'pdf', // Note: This is passed to determine show/hide of the print button.
+            ];
+            $pdf = PDF::loadView($view, $data);
 
             return $pdf->download($fileName);
         }
