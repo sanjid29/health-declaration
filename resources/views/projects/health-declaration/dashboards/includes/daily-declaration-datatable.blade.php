@@ -20,6 +20,16 @@ $datatableName = "dailyDeclarationDt";
 ?>
 <h3>Today's Health Declarations</h3>
 <div class="{{$datatableName}}-container datatable-container">
+    <div class="filters col-md-12 no-padding">
+        @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Has Covid Symptoms?', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
+        @include('form.select-array',['var'=>['name'=>'have_monkey_pox_symptoms','label'=>'Has Monkey Pox?', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
+        @include('form.select-array',['var'=>['name'=>'is_vaccinated','label'=>'Is Vaccinated?', 'div'=>'col-sm-3','options'=>(\App\Declaration::$yesNo)]])
+        <div class="clearfix"></div>
+        @include('form.text',['var'=>['name'=>'passport_no','label'=>'Passport No', 'div'=>'col-sm-3']])
+        @include('form.text',['var'=>['name'=>'mobile_no','label'=>'Mobile No', 'div'=>'col-sm-3']])
+        @include('form.text',['var'=>['name'=>'flight_no','label'=>'Flight No', 'div'=>'col-sm-3']])
+        <div class="clearfix"></div>
+    </div>
     <table id="{{$datatableName}}"
            class="table module-grid table-condensed {{$datatableName}} dataTable table-hover bordered"
            style="width: 100%">
@@ -47,7 +57,15 @@ Section: Data table JS
     <script type="text/javascript">
         var {{$datatableName}} = $('#{{$datatableName}}').DataTable({
             ajax: {
-                url: "{!! $ajaxUrl !!}"
+                url: "{!! $ajaxUrl !!}",
+                data: function (d) {
+                    d.have_covid_symptoms = $('#have_covid_symptoms').val();
+                    d.have_monkey_pox_symptoms = $('#have_monkey_pox_symptoms').val();
+                    d.is_vaccinated = $('#is_vaccinated').val();
+                    d.passport_no = $('#passport_no').val();
+                    d.mobile_no = $('#mobile_no').val();
+                    d.flight_no = $('#flight_no').val();
+                }
             },
             columns: [{!! $columnsJson !!}],
             processing: true,
@@ -77,7 +95,10 @@ Section: Data table JS
         {{--        {{$datatableName}}.buttons().container().appendTo('.dataTables_length');--}}
 
         // Respond to change
+        $('#have_covid_symptoms,#have_monkey_pox_symptoms,#is_vaccinated,#passport_no,#mobile_no,#flight_no').on('change', function () {
 
+            {{$datatableName}}.draw();
+        });
 
 
 

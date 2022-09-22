@@ -53,27 +53,16 @@ $declaration = $element;
         @include('form.select-model-multiple',['var'=>['name'=>'visited_country_ids','label'=>'Country visited with last two (02) week (if any). / গত দুই (০২) সপ্তাহে যে সমস্ত দেশে ভ্রমণ করেছেন (যদি থাকে)','div'=>'col-sm-8','name_field'=>'name', 'model'=>\App\Country::class,]])
         <div class="clearfix"></div>
         <h4>Where are you staying in Bangladesh?/বাংলাদেশে অবস্থানকালীন ঠিকানা</h4>
-{{--        @include('form.select-array',['var'=>['name'=>'address_type','label'=>'Rural Area/গ্রাম / Town/শহর', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])--}}
+        {{--        @include('form.select-array',['var'=>['name'=>'address_type','label'=>'Rural Area/গ্রাম / Town/শহর', 'div'=>'col-sm-4','options'=>(\App\Declaration::$typeOfAddresses)]])--}}
         <div class="clearfix"></div>
-        @include('form.custom.division-district-upazila',['var'=>['prefixIdentifier'=>'','labelIdentifier'=>'']])
-{{--        <div id="town">--}}
-{{--            @include('form.text',['var'=>['name'=>'city_corporation','label'=>'City Corporation/ইউনিয়ন', 'div'=>'col-sm-4']])--}}
-{{--            @include('form.text',['var'=>['name'=>'thana','label'=>'Thana/ওয়ার্ড', 'div'=>'col-sm-4']])--}}
-{{--            @include('form.text',['var'=>['name'=>'ward','label'=>'Ward/ওয়ার্ড', 'div'=>'col-sm-4']])--}}
-{{--            @include('form.text',['var'=>['name'=>'area','label'=>'Area/মহল্লা', 'div'=>'col-sm-4']])--}}
-{{--        </div>--}}
-{{--        <div id="rural">--}}
-{{--            @include('form.text',['var'=>['name'=>'union','label'=>'Union/ইউনিয়ন', 'div'=>'col-sm-4']])--}}
-{{--            @include('form.text',['var'=>['name'=>'village','label'=>'Village/গ্রাম', 'div'=>'col-sm-4']])--}}
-{{--        </div>--}}
-{{--        <div class="clearfix"></div>--}}
-{{--        @include('form.text',['var'=>['name'=>'road','label'=>'Road', 'div'=>'col-sm-4']])--}}
-{{--        @include('form.text',['var'=>['name'=>'house','label'=>'House/বাড়ী', 'div'=>'col-sm-4']])--}}
+        @include('form.select-model',['var'=>['name'=>'district_id','label'=>'District/জেলা','model'=>\App\District::class,'class'=>'select2','container_class'=>'col-md-4']])
         @include('form.number',['var'=>['name'=>'local_contact_no','label'=>'Local Phone No/স্থানীয় মোবাইল নম্বর *', 'div'=>'col-sm-4']])
 
         <div class="clearfix"></div>
         <h4>Symptoms</h4>
         @include('form.select-array',['var'=>['name'=>'have_covid_symptoms','label'=>'Do you have any symptoms ( Fever, Cough, Sore throat, Shortness of Breath, Loss of smell or taste)  of COVID-19? / আপনার কি কোভিড-১৯ এর কোন উপসর্গ (জ্বর,  কাশি, গলাব্যাথা, শ্বাসকষ্ট, স্বাদ বা গন্ধ না পাওয়া) আছে?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
+        @include('form.select-array',['var'=>['name'=>'have_monkey_pox_symptoms','label'=>'Do you have any following symptoms ( Fever, Rash, Skin lesion, Pain or Swelling of Lymph node) ? / আপনার কি নিম্নলিখিত উপসর্গ আছে (জ্বর, ফুসকুড়ি, ত্বকের ক্ষত,  লিম্ফ নোড ব্যথা বা ফোলা) ?', 'div'=>'col-sm-8','options'=>(\App\Declaration::$yesNo)]])
+
         <div class="clearfix"></div>
         <h4>Covid 19 Information</h4>
         <div class="clearfix"></div>
@@ -81,14 +70,6 @@ $declaration = $element;
         <div class="clearfix"></div>
         @include('form.select-array',['var'=>['name'=>'is_vaccinated','label'=>'Have you taken Vaccination for COVID-19? /আপনি কি কোভিড-১৯ এর জন্য টিকা নিয়েছেন?', 'div'=>'col-sm-6','options'=>(\App\Declaration::$yesNo)]])
         <div class="clearfix"></div>
-{{--        <div id="vaccination-info">--}}
-{{--            <h6>If Yes, show Covid-19 Vaccination Certificate and submit one photocopy/ টিকার কার্ডটি দেখান, এবং ফটোকপি জমা দিন</h6>--}}
-{{--            <div class="clearfix"></div>--}}
-{{--            @include('form.select-model',['var'=>['name'=>'primary_vaccine_id','label'=>'Vaccine\টিকা','div'=>'col-sm-4','name_field'=>'name', 'model'=>\App\Vaccine::class,]])--}}
-{{--            @include('form.date',['var'=>['name'=>'first_vaccine_date','label'=>'Date of 1st Dose/১ম ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])--}}
-{{--            @include('form.date',['var'=>['name'=>'second_vaccine_date','label'=>'Date of 2nd Dose/২য় ডোজ নেয়ার তারিখ', 'div'=>'col-sm-3']])--}}
-{{--            <div class="clearfix"></div>--}}
-{{--        </div>--}}
         <div id="rt-pcr-field">
             <div class="clearfix"></div>
             @include('form.select-array',['var'=>['name'=>'is_rt_pcr_negative','label'=>'Do you have Covid19 rt-PCR negative report within 72 hours of Travel? /আপনার কি ৭২ ঘন্টা মেয়াদী কোভিড-১৯ আরটিপিসিআর নেগেটিভ সনদ রয়েছে?', 'div'=>'col-sm-10','options'=>(\App\Declaration::$yesNo)]])
