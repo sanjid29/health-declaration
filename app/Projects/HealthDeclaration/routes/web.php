@@ -63,6 +63,9 @@ Route::middleware($middlewares)->group(function () use ($modules, $moduleGroups)
     Route::get('data/{key}', [DataBlockController::class, 'show'])->name('data-block.show'); // Data-block
     Route::get('report/{key}', [ReportController::class, 'show'])->name('report'); // Report
     Route::get('datatable/{key}', [DatatableController::class, 'show'])->name('datatable.json'); // Datatable
+    Route::get('php-info', function(){
+         phpinfo();
+    }); // Datatable
 
     /*---------------------------------
     | Project specific routs
